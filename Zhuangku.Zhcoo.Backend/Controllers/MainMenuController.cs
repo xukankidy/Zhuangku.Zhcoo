@@ -12,12 +12,12 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
     {
         public JsonResult GetList()
         {
-            var rets = new ResultEntity<MenuEntity>();
+            ResultEntity<MenuEntity> rets = new ResultEntity<MenuEntity>();
 
             #region 拼装对象
 
-            var list = new List<MenuEntity>();
-            var folder1 = new MenuEntity
+            List<MenuEntity> list = new List<MenuEntity>();
+            MenuEntity folder1 = new MenuEntity
             {
                 Id = "1",
                 Code = "zhuangxiubankuai",
@@ -27,7 +27,7 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
                 IsLeaf = false,
                 IsEnabled = true
             };
-            var folder2 = new MenuEntity
+            MenuEntity folder2 = new MenuEntity
             {
                 Id = "2",
                 Code = "zhaobiaotongji",
@@ -37,7 +37,7 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
                 IsLeaf = false,
                 IsEnabled = true
             };
-            var folder3 = new MenuEntity
+            MenuEntity folder3 = new MenuEntity
             {
                 Id = "3",
                 Code = "Demo",
@@ -47,7 +47,7 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
                 IsLeaf = false,
                 IsEnabled = true
             };
-            var item1 = new MenuEntity
+            MenuEntity item1 = new MenuEntity
             {
                 Id = "3",
                 Code = "zaijiangongdi",
@@ -59,7 +59,7 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
                 Url = "/Building/Index/",
                 IsEnabled = true
             };
-            var item2 = new MenuEntity
+            MenuEntity item2 = new MenuEntity
             {
                 Id = "4",
                 Code = "zhuangshizhaobaioguanli",
@@ -71,7 +71,7 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
                 Url = "/Building/Manager/",
                 IsEnabled = true
             };
-            var item3 = new MenuEntity
+            MenuEntity item3 = new MenuEntity
             {
                 Id = "5",
                 Code = "huiyuantongji",
@@ -83,7 +83,7 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
                 Url = "/Tongji/Index/",
                 IsEnabled = true
             };
-            var item4 = new MenuEntity
+            MenuEntity item4 = new MenuEntity
             {
                 Id = "6",
                 Code = "kefutongij",
@@ -95,7 +95,7 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
                 Url = "/Tongji/kefu/",
                 IsEnabled = true
             };
-            var item5 = new MenuEntity
+            MenuEntity item5 = new MenuEntity
             {
                 Id = "5",
                 Code = "tishikongjian",
