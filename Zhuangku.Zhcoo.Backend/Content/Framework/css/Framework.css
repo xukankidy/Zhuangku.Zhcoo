@@ -1,0 +1,518 @@
+﻿/* =========================================
+ * 标签样式
+ * ========================================= */
+#ZkHtmlTag {
+    width: 100%;
+    height: 100%;
+}
+
+#ZkBodyTag {
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+}
+/* =========================================
+ * 包裹容器样式
+ * ========================================= */
+#ZkWrapper {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background-color: #FFFFFF;
+}
+/* =========================================
+ * 头部样式
+ * ========================================= */
+#ZkHeaderWrapper {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 50px;
+    background-color: #438EB9;
+    box-shadow: #CCCCCC 0px 2px 2px;
+    z-index: 3;
+}
+
+#ZkHeaderTitle {
+    float: left;
+    height: 50px;
+    padding: 0px 10px;
+}
+
+    #ZkHeaderTitle .zk-text {
+        line-height: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #FFFFFF;
+        letter-spacing: 4px;
+    }
+/* =========================================
+ * 身体样式
+ * ========================================= */
+#ZkBodyWrapper {
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-color: #FFFFFF;
+}
+/* =========================================
+ * 侧栏样式（菜单树）
+ * ========================================= */
+#ZkMainMenuWrapper {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    width: 200px;
+    background-color: #F2F2F2;
+    border: solid 1px #CCCCCC;
+    border-width: 0px 1px 0px 0px;
+    box-shadow: #CCCCCC 0px 0px 4px;
+    z-index: 2;
+}
+/* =========================================
+ * 标签视图样式
+ * ========================================= */
+#ZkContentWrapper {
+    position: absolute;
+    top: 0px;
+    left: 200px;
+    bottom: 0px;
+    right: 0px;
+    background-color: #FFFFFF;
+    z-index: 1;
+}
+/* ===== 标签视图包裹器 ============== */
+#ZkTabViewWrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFF;
+    overflow: hidden;
+}
+/* ===== 标签栏包裹器 ============== */
+#ZkTabViewTabBarWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background-color: #EEF5F9;
+    border-bottom: solid 1px #d7d7d7;
+    user-select: none;
+}
+
+#ZkTabViewTabBarTagGroupWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 40px;
+    overflow: hidden;
+}
+
+#ZkTabViewTabBarTagGroupInnerWrapper {
+    padding: 5px 5px 0 5px;
+}
+
+/* ===== 标签栏右侧选项包裹器 ============== */
+#ZkTabViewTabBarOptionWrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    opacity: 0.5;
+    transition: opacity 0.5s;
+    cursor: pointer;
+}
+
+    #ZkTabViewTabBarOptionWrapper:hover {
+        opacity: 1;
+    }
+
+#ZkTvtbbOptionIcon {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+.zk-tvtb-item-wrapper {
+    height: 35px;
+    line-height: 35px;
+    padding: 0 10px 0 32px;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 5px;
+    border: solid 1px #d7d7d7;
+    border-top: solid 3px #d7d7d7;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    opacity: 0.7;
+    transition: all 0.5s;
+}
+
+    .zk-tvtb-item-wrapper:hover {
+        opacity: 1;
+        border-top: solid 3px #146aa2;
+    }
+
+    .zk-tvtb-item-wrapper.on {
+        opacity: 1;
+        border-top: solid 3px #146aa2;
+        cursor: default;
+        font-weight: bold;
+        background-color: #fff;
+        font-size: 14px;
+    }
+
+.zk-tvtb-item-closeIcon {
+    margin: 0 0 2px 4px;
+    cursor: pointer;
+}
+
+.zk-tvtb-item-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+/* ===== 标签视图内容包裹器 ============== */
+#ZkTabViewContentViewWrapper {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFF;
+}
+
+    #ZkTabViewContentViewWrapper .zk-iframe-tvc,
+    #ZkTabViewContentViewWrapper .zk-page-tvc {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background-color: #FFF;
+        position: absolute;
+    }
+
+    #ZkTabViewContentViewWrapper .zk-page-tvc {
+        padding: 8px;
+    }
+/* =========================================
+ * 文字样式
+ * ========================================= */
+.zk-text {
+    font-family: "SimSun";
+    font-size: 12px;
+}
+/* =========================================
+ * 全局遮罩样式
+ * ========================================= */
+#ZkLoadingWrapper {
+    z-index: 4;
+}
+
+#ZkLoadingBg {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0px;
+    bottom: 0px;
+    background-color: #EEEEEE;
+}
+
+#ZkLoadingPanel {
+    background-color: #FFFFFF;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    margin-left: -150px;
+    width: 300px;
+    height: 70px;
+    line-height: 80px;
+    text-align: center;
+    border: solid 1px #CCCCCC;
+    border-radius: 5px;
+    box-shadow: #CCCCCC 0 0 4px;
+}
+/* =========================================
+ * 加载动画样式
+ * ========================================= */
+.zk-icon-loading {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+    .zk-icon-loading i {
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: 50%;
+        background: linear-gradient(transparent 0%,transparent,70%,#333 30%,#333 100%);
+        -webkit-animation: LoadingAnimation .6s linear 0s infinite;
+        -moz-animation: LoadingAnimation .6s linear 0s infinite;
+    }
+
+@-webkit-keyframes LoadingAnimation {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    50% {
+        transform: rotate(180deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+/* =========================================
+ * 上下文菜单
+ * ========================================= */
+.zk-contextmenu-wrapper {
+    border: solid 1px #9ba7b7;
+    padding: 0px 0px 1px 0px;
+    background-color: #f2f4fe;
+    position: fixed;
+    min-width: 150px;
+    box-shadow: 1px 1px 1px #9ba7b7;
+    display: none;
+}
+
+/* =========================================
+ * 上下文菜单项
+ * ========================================= */
+.zk-contextmenuitem-wrapper {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 0 0 10px;
+    margin: 1px 1px 0 1px;
+    cursor: pointer;
+    transition: all 0.5s;
+    position: relative;
+}
+
+    .zk-contextmenuitem-wrapper:hover {
+        background-color: #fdf4bf;
+    }
+
+.zk-contextmenuitem-innerwrapper .zk-icon {
+    margin-right: 5px;
+}
+
+.zk-contextmenuitem-innerwrapper {
+    margin-right: 30px;
+}
+
+.zk-contextmenuitem-option {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+}
+
+.zk-contextmenuitem-innerwrapper.zk-on .zk-text {
+    font-weight: bold;
+}
+/* =========================================
+ * 主菜单菜单项
+ * ========================================= */
+.zk-mainmenuitem-wrapper {
+    line-height: 40px;
+}
+
+.zk-mainmenuitem-innerwrapper {
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    background-color: #F2F2F2;
+    border-left: solid 4px #F2F2F2;
+    border-bottom: solid 1px #CCCCCC;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+    .zk-mainmenuitem-innerwrapper:hover {
+        background-color: #FFFFFF;
+        border-left: solid 4px #438EB9;
+    }
+
+        .zk-mainmenuitem-innerwrapper:hover .zk-mainmenuitem-text {
+            color: #438EB9;
+        }
+
+.zk-mainmenuitem-icon {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+
+.zk-mainmenuitem-text {
+    padding: 0 0 0 40px;
+    font-size: 14px;
+}
+/* =========================================
+ * 子菜单菜单项
+ * ========================================= */
+.zk-mainmenusubitem-groupwrapper {
+    border-bottom: solid 1px #CCCCCC;
+}
+
+.zk-mainmenusubitem-innerwrapper {
+    height: 30px;
+    line-height: 30px;
+    position: relative;
+    background-color: #FFFFFF;
+    border-left: solid 4px #F2F2F2;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+    .zk-mainmenusubitem-innerwrapper:hover {
+        border-left: solid 4px #438EB9;
+    }
+
+        .zk-mainmenusubitem-innerwrapper:hover .zk-mainmenusubitem-text {
+            color: #438EB9;
+        }
+
+.zk-mainmenusubitem-icon {
+    position: absolute;
+    top: 7px;
+    left: 20px;
+}
+
+.zk-mainmenusubitem-text {
+    padding: 0 0 0 50px;
+    font-size: 14px;
+}
+/* =========================================
+ * 全局遮罩
+ * ========================================= */
+.zk-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    opacity: 0.4;
+}
+/* =========================================
+ * 面板
+ * ========================================= */
+.zk-panel {
+    min-width: 150px;
+    min-height: 100px;
+    background-color: #FFFFFF;
+    border: solid 1px #438EB9;
+    position: absolute;
+    box-shadow: #438EB9 0 0 4px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.zk-panel-titlebar {
+    background-color: #438EB9;
+    position: relative;
+}
+
+.zk-panel-titlebarinner {
+    padding: 0 30px;
+    height: 30px;
+    line-height: 26px;
+}
+
+.zk-panel-titlebaricon {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+}
+
+.zk-panel-titlebartext {
+    color: #FFFFFF;
+    cursor: default;
+}
+
+.zk-panel-titlebarOption {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    right: 0;
+    top: 0;
+    text-align: center;
+    color: #FFF;
+    cursor: pointer;
+    background-color: #438EB9;
+    opacity: 1;
+    transition: all 0.5s;
+}
+
+    .zk-panel-titlebarOption:hover {
+        opacity: 0.6;
+    }
+
+.zk-panel-contentwrapper {
+    background-color: #FFFFFF;
+    position: relative;
+}
+/* =========================================
+ * 信息框
+ * ========================================= */
+.zk-panel-alert {
+    display: none;
+    top: 40%;
+    left: 50%;
+}
+
+    .zk-panel-alert .zk-panel-contentwrapper {
+        width: 300px;
+        min-height: 150px;
+    }
+
+.zk-panel-alert-bigicon {
+    position: absolute;
+    top: 30px;
+    left: 16px;
+}
+
+.zk-panel-alert-infolist {
+    padding: 18px 8px 8px 96px;
+}
+
+.zk-panel-alert-btnlist {
+    position: absolute;
+    bottom: 8px;
+    left: 96px;
+}
+
+.zk-panel-alert-messagelist {
+    line-height: 16px;
+    color: #438EB9;
+}
+
+.zk-panel-alert-desclist {
+    line-height: 16px;
+}
+
+/* =========================================
+ * 按钮样式 - 重写bootstrape
+ * ========================================= */
+.btn {
+    font-size: 12px;
+    font-family: "SimSun";
+}
+.btn-primary {
+    background-color: #438EB9;
+    border-color: #438EB9;
+}
