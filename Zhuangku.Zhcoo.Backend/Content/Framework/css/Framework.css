@@ -16,10 +16,10 @@
  * ========================================= */
 #ZkWrapper {
     position: fixed;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    bottom: 0px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     background-color: #FFFFFF;
 }
 /* =========================================
@@ -27,19 +27,19 @@
  * ========================================= */
 #ZkHeaderWrapper {
     position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 50px;
     background-color: #438EB9;
-    box-shadow: #CCCCCC 0px 2px 2px;
+    box-shadow: #CCCCCC 0 2px 2px;
     z-index: 3;
 }
 
 #ZkHeaderTitle {
     float: left;
     height: 50px;
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 
     #ZkHeaderTitle .zk-text {
@@ -49,15 +49,33 @@
         color: #FFFFFF;
         letter-spacing: 4px;
     }
+
+#ZkHeaderOption {
+    height: 50px;
+    line-height: 50px;
+}
+
+#ZkHeaderOptionToggleMainMenu,
+#ZkHeaderOptionRefreshActiveTabMenuItem {
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.5s;
+}
+
+    #ZkHeaderOptionToggleMainMenu:hover,
+    #ZkHeaderOptionRefreshActiveTabMenuItem:hover {
+        opacity: 1;
+    }
+
 /* =========================================
  * 身体样式
  * ========================================= */
 #ZkBodyWrapper {
     position: fixed;
     top: 50px;
-    left: 0px;
-    bottom: 0px;
-    right: 0px;
+    left: 0;
+    bottom: 0;
+    right: 0;
     background-color: #FFFFFF;
 }
 /* =========================================
@@ -65,28 +83,39 @@
  * ========================================= */
 #ZkMainMenuWrapper {
     position: absolute;
-    top: 0px;
-    left: 0px;
-    bottom: 0px;
+    top: 0;
+    left: 0;
+    bottom: 0;
     width: 200px;
     background-color: #F2F2F2;
     border: solid 1px #CCCCCC;
-    border-width: 0px 1px 0px 0px;
-    box-shadow: #CCCCCC 0px 0px 4px;
+    border-width: 0 1px 0 0;
+    box-shadow: #CCCCCC 0 0 4px;
     z-index: 2;
+    overflow: auto;
+    transition: left 0.5s;
 }
+
+    #ZkMainMenuWrapper.zk-move-left {
+        left: -200px;
+    }
 /* =========================================
  * 标签视图样式
  * ========================================= */
 #ZkContentWrapper {
     position: absolute;
-    top: 0px;
+    top: 0;
     left: 200px;
-    bottom: 0px;
-    right: 0px;
+    bottom: 0;
+    right: 0;
     background-color: #FFFFFF;
     z-index: 1;
+    transition: left 0.5s;
 }
+
+    #ZkContentWrapper.zk-move-left {
+        left: 0;
+    }
 /* ===== 标签视图包裹器 ============== */
 #ZkTabViewWrapper {
     position: absolute;
@@ -223,8 +252,8 @@
     position: fixed;
     left: 0;
     right: 0;
-    top: 0px;
-    bottom: 0px;
+    top: 0;
+    bottom: 0;
     background-color: #EEEEEE;
 }
 
@@ -233,14 +262,21 @@
     position: fixed;
     top: 40%;
     left: 50%;
-    margin-left: -150px;
-    width: 300px;
-    height: 70px;
-    line-height: 80px;
     text-align: center;
     border: solid 1px #CCCCCC;
     border-radius: 5px;
     box-shadow: #CCCCCC 0 0 4px;
+    padding: 8px;
+}
+
+.zk-loadingPanel {
+    border: solid 1px #146aa2;
+    border-radius: 5px;
+    box-shadow: #146aa2 0 0 4px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    padding: 8px;
 }
 /* =========================================
  * 加载动画样式
@@ -248,6 +284,7 @@
 .zk-icon-loading {
     position: relative;
     display: inline-block;
+    vertical-align: middle;
     width: 30px;
     height: 30px;
 }
@@ -257,7 +294,7 @@
         height: 100%;
         display: block;
         border-radius: 50%;
-        background: linear-gradient(transparent 0%,transparent,70%,#333 30%,#333 100%);
+        background: linear-gradient(transparent 0%,transparent,70%,#146aa2 30%,#146aa2 100%);
         -webkit-animation: LoadingAnimation .6s linear 0s infinite;
         -moz-animation: LoadingAnimation .6s linear 0s infinite;
     }
@@ -281,7 +318,7 @@
  * ========================================= */
 .zk-contextmenu-wrapper {
     border: solid 1px #9ba7b7;
-    padding: 0px 0px 1px 0px;
+    padding: 0 0 1px 0;
     background-color: #f2f4fe;
     position: fixed;
     min-width: 150px;
@@ -365,6 +402,8 @@
  * ========================================= */
 .zk-mainmenusubitem-groupwrapper {
     border-bottom: solid 1px #CCCCCC;
+    padding: 5px 0;
+    background-color: #FFFFFF;
 }
 
 .zk-mainmenusubitem-innerwrapper {
@@ -393,7 +432,7 @@
 
 .zk-mainmenusubitem-text {
     padding: 0 0 0 50px;
-    font-size: 14px;
+    font-size: 12px;
 }
 /* =========================================
  * 全局遮罩
@@ -512,6 +551,7 @@
     font-size: 12px;
     font-family: "SimSun";
 }
+
 .btn-primary {
     background-color: #438EB9;
     border-color: #438EB9;

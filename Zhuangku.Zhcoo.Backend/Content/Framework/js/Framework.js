@@ -22,6 +22,8 @@ let _zkFramework_ = {
         , _iTabViewAllowedMaxTabOpenedCount_: 5 //允许打开的最大选项卡数量
         , _iAnimationTransitionTime_: 200//动画过度时间
         , _sLoadingText_: '请稍候...'
+        , _iLoadingMaskAppearTime_: 1000//ajax请求出现加载进度面的时间
+        , _iHttpAjaxTimeout_: 5000//ajax请求超时时间
         // ======================================================================
         // 初始化变量，可从外部接受参数
         // ======================================================================
@@ -36,6 +38,8 @@ let _zkFramework_ = {
         , _zkBodyTag_: null//Body标签
         , _zkWrapper_: null//整体包裹器
         , _zkHeaderWrapper_: null//头部包裹器
+        , _zkHeaderOptionToggleMainMenu_: null//头部切换主菜单按钮
+        , _zkHeaderOptionRefreshActiveTabMenuItem_: null//头部刷新当前标签页
         , _zkBodyWrapper_: null//身体包裹器
         , _zkMainMenuWrapper_: null//主菜单包裹器
         , _zkContentWrapper_: null//内容包裹器
@@ -46,10 +50,22 @@ let _zkFramework_ = {
             dom._zkBodyTag_ = $('#ZkBodyTag');
             dom._zkWrapper_ = $('#ZkWrapper');
             dom._zkHeaderWrapper_ = $('#ZkHeaderWrapper');
+            dom._zkHeaderOptionToggleMainMenu_ = $('#ZkHeaderOptionToggleMainMenu');
+            dom._zkHeaderOptionRefreshActiveTabMenuItem_ = $('#ZkHeaderOptionRefreshActiveTabMenuItem');
             dom._zkBodyWrapper_ = $('#ZkBodyWrapper');
             dom._zkMainMenuWrapper_ = $('#ZkMainMenuWrapper');
             dom._zkContentWrapper_ = $('#ZkContentWrapper');
             dom._zkLoadingWrapper_ = $('#ZkLoadingWrapper');
+
+            dom._zkHeaderOptionToggleMainMenu_.click(function () {
+                dom._zkMainMenuWrapper_.toggleClass('zk-move-left');
+                dom._zkContentWrapper_.toggleClass('zk-move-left');
+            });
+
+            dom._zkHeaderOptionRefreshActiveTabMenuItem_.click(function () {
+                let tabVView = _zkFramework_._zkUiComponent_._zkUiTabView_;
+                tabVView._refreshTabItem_(tabVView._member_._sFocusTabId_);
+            });
         }
     }
     // ==========================================================================
@@ -65,6 +81,7 @@ let _zkFramework_ = {
                 id: ''
                 , class: ''
                 , text: ''
+                , title: ''
             };
 
             //判断参数是否为字符串
@@ -84,6 +101,9 @@ let _zkFramework_ = {
             }
             if (options.class) {
                 $text.addClass(options.class);
+            }
+            if (options.title) {
+                $text.attr('title', options.title);
             }
 
             return $text;
@@ -168,7 +188,7 @@ let _zkFramework_ = {
         // 加载动画层 Loading
         // ======================================================================
         , _zkUiControlLoading_: function () {
-            let $loading = $('<div class="loadingIcon"><i></i></div>');
+            let $loading = $('<div class="zk-icon-loading"><i></i></div>');
             return $loading;
         }
         // ======================================================================
@@ -438,7 +458,34 @@ let _zkFramework_ = {
             // ==================================================================
             // 刷新标签项
             // ==================================================================
-            , _refreshTabItem_: function (tabId) { }
+            , _refreshTabItem_: function (tabId) {
+                let member = this._member_;
+                let tvComponent = this._component_;
+                let openedTab = {};
+
+                for (let i = 0, len = member._aOpendTabs_.length; i < len; i++) {
+                    if (member._aOpendTabs_[i].id === tabId) {
+                        openedTab = member._aOpendTabs_[i]
+                        break;
+                    }
+                }
+                let $contentWrapper = tvComponent._tabViewContentViewWrapper_.find('#Tab_Content_' + tabId);
+
+                if (openedTab.isIframe) {
+                    $contentWrapper.attr('src', $contentWrapper.attr('src'));
+                } else {
+                    $contentWrapper.empty();
+                    _zkFramework_._zkHttp_._zkHttpGet_({
+                        url: openedTab.src
+                        , dataType: 'html'
+                        , mask: true
+                        , loadingTxt: '页面加载中，请稍候...'
+                        , done: function (htmlText) {
+                            $contentWrapper.append(htmlText);
+                        }
+                    });
+                }
+            }
             // ==================================================================
             // 创建标签项
             // ==================================================================
@@ -661,6 +708,7 @@ let _zkFramework_ = {
                 });
                 let menuItemInnerWrapper = control._zkUiControlBorder_({
                     class: 'zk-mainmenuitem-innerwrapper'
+                    , title: options.Title
                 });
                 let miIcon = control._zkUiControlIcon_({
                     class: setting._sMainMenuItemIconPrefix_ + options.Icon + ' zk-mainmenuitem-icon'
@@ -697,7 +745,13 @@ let _zkFramework_ = {
                 if (menuItemGroupWraper.children().length > 0) {
                     menuItemWrapper.append(menuItemGroupWraper);
                     menuItemInnerWrapper.click(function () {
-                        menuItemGroupWraper.slideToggle(setting._iAnimationTransitionTime_);
+                        if (!menuItemGroupWraper.is(":hidden")) {
+                            return;
+                        }
+                        component._zkUiMenuView_._component_._MenuViewWrapper_.find('.zk-mainmenusubitem-groupwrapper').each(function () {
+                            $(this).slideUp(setting._iAnimationTransitionTime_);
+                        });
+                        menuItemGroupWraper.slideDown(setting._iAnimationTransitionTime_);
                     });
                 }
             }
@@ -714,6 +768,7 @@ let _zkFramework_ = {
                 });
                 let menuSubItemInnerWrapper = control._zkUiControlBorder_({
                     class: 'zk-mainmenusubitem-innerwrapper'
+                    , title: options.Title
                 });
                 let miIcon = control._zkUiControlIcon_({
                     class: setting._sMainMenuItemIconPrefix_ + options.Icon + ' zk-mainmenusubitem-icon'
@@ -1060,6 +1115,7 @@ let _zkFramework_ = {
             let setting = _zkFramework_._zkSetting_;
             let ui = _zkFramework_._zkUiComponent_;
             let dom = _zkFramework_._zkDom_;
+            let component = _zkFramework_._zkUiComponent_;
 
             let defaults = {
                 url: null//访问路径
@@ -1080,12 +1136,12 @@ let _zkFramework_ = {
 
             //需要添加遮罩层
             if (options.mask) {
-                $mask = control._zkUiControlMask_();
+                $mask = control._zkUiControlMask_().css({ opacity: 0 });
                 $loadingPanel = ui._zkUiLoadingPanel_({
                     text: options.loadingTxt
                 })._zkGetZIndex_().css({ opacity: 0 });
                 dom._zkBodyTag_.append($mask).append($loadingPanel);
-                showLoadingIntervalId = setTimeout(showLoadingMask, 1000);
+                showLoadingIntervalId = setTimeout(showLoadingMask, setting._iLoadingMaskAppearTime_);
             }
 
             $.ajax({
@@ -1096,24 +1152,31 @@ let _zkFramework_ = {
                 , data: options.data
                 , cache: false
             })
-                .done(function (data) {
+                .done(function (dataObj) {
                     if (options.done) {
-                        options.done(data);
+                        options.done(dataObj);
                     }
                 })
-                .fail(function (data) {
-                    if (options.fail) {
+                .fail(function (dataObj) {
+                    console.log(dataObj);
+                    if (dataObj.fail) {
                         let errorMessage = '请求失败，请稍候重试';
-                        if (data.statusText === 'timeout') {
+                        if (dataObj.statusText === 'timeout') {
                             errorMessage = '请求超时，请重试';
-                        } else if (data.statusText === 'error') {
+                        } else if (dataObj.statusText === 'error') {
                             if (data.status === 404) {
                                 errorMessage = '你请求的资源不存在';
-                            } else if (data.status === 500) {
+                            } else if (dataObj.status === 500) {
                                 errorMessage = '服务器发生错误，请稍候重试';
                             }
                         }
-                        options.fail(errorMessage);
+                        component._zkUiAlert_({
+                            title: '请求失败'
+                            , icon: 'warning'
+                            , message: errorMessage
+                            , bigIcon: 'warning'
+                            , okText: '我知道了'
+                        });
                     }
                 })
                 .always(function () {
@@ -1174,7 +1237,7 @@ let _zkFramework_ = {
             , title: '我的首页'
             , isIframe: true
             , isClosable: false
-            , src: 'http://map.baidu.com/'
+            , src: 'http://www.baidu.com/'
         });
 
         post({

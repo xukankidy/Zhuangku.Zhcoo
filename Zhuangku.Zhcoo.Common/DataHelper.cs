@@ -28,7 +28,7 @@
         /// <returns></returns>
         public static int GetInt(string inputString, int defaultValue = 0)
         {
-            var ret = defaultValue;
+            int ret = defaultValue;
             if (int.TryParse(inputString, out int temp))
             {
                 ret = temp;
@@ -38,7 +38,7 @@
 
         public static double GetDouble(string inputString, double defaultValue = 0)
         {
-            var ret = defaultValue;
+            double ret = defaultValue;
             if (double.TryParse(inputString, out double temp))
             {
                 ret = temp;
@@ -48,7 +48,7 @@
 
         public static decimal GetDecimal(string inputString, decimal defaultValue = 0)
         {
-            var ret = defaultValue;
+            decimal ret = defaultValue;
             if (decimal.TryParse(inputString, out decimal temp))
             {
                 ret = temp;
@@ -58,7 +58,7 @@
 
         public static float GetFloat(string inputString, float defaultValue = 0)
         {
-            var ret = defaultValue;
+            float ret = defaultValue;
             if (float.TryParse(inputString, out float temp))
             {
                 ret = temp;
@@ -68,7 +68,7 @@
 
         public static bool GetBoolen(string inputString, bool defaultValue = false)
         {
-            var ret = defaultValue;
+            bool ret = defaultValue;
             if (bool.TryParse(inputString, out bool temp))
             {
                 ret = temp;

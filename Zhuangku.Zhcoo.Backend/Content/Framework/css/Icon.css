@@ -2,7 +2,7 @@
  * Title       : 图标样式表
  * Project     : 重庆木九科技商务报价平台前端框架
  * Version     : 1.0.0
- * Date        : 2019年3月16日
+ * Date        : 2019年4月8日
  * Developer   : 徐侃（Kidy）
  * Description : 定义了系统可用的图标样式，该样式表和相应的Css Sprite图片
                  由重庆木九科技前端优化工具生成
@@ -78,6 +78,8 @@
 .zk-icon-16-up,
 .zk-icon-16-warning,
 .zk-icon-24-list,
+.zk-icon-24-menu,
+.zk-icon-24-refresh,
 .zk-icon-64-bulb,
 .zk-icon-64-error,
 .zk-icon-64-forbidden,
@@ -520,6 +522,18 @@
 
 .zk-icon-24-list {
     background-position: 0 -32px;
+    height: 24px;
+    width: 24px;
+}
+
+.zk-icon-24-menu {
+    background-position: -24px -32px;
+    height: 24px;
+    width: 24px;
+}
+
+.zk-icon-24-refresh {
+    background-position: -48px -32px;
     height: 24px;
     width: 24px;
 }

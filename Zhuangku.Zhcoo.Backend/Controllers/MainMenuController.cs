@@ -22,7 +22,7 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
                 Id = "1",
                 Code = "zhuangxiubankuai",
                 ParentId = "0",
-                Title = "装修板块",
+                Title = "装修板块装修板块装修板块装修板块",
                 Icon = "folder",
                 IsLeaf = false,
                 IsEnabled = true
@@ -52,7 +52,7 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
                 Id = "3",
                 Code = "zaijiangongdi",
                 ParentId = "1",
-                Title = "在建工地",
+                Title = "在建工地在建工地在建工地在建工地",
                 Icon = "list",
                 IsLeaf = true,
                 IsIframe = true,
@@ -108,6 +108,16 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
                 IsEnabled = true
             };
             folder1.NodeList.Add(item1);
+            folder1.NodeList.Add(item2);
+            folder1.NodeList.Add(item2);
+            folder1.NodeList.Add(item2);
+            folder1.NodeList.Add(item2);
+            folder1.NodeList.Add(item2);
+            folder1.NodeList.Add(item2);
+            folder1.NodeList.Add(item2);
+            folder1.NodeList.Add(item2);
+            folder1.NodeList.Add(item2);
+            folder1.NodeList.Add(item2);
             folder1.NodeList.Add(item2);
             folder2.NodeList.Add(item3);
             folder2.NodeList.Add(item4);
