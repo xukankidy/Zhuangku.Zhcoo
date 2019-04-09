@@ -10,7 +10,6 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
         /// <returns></returns>
         public ActionResult Notice()
         {
-            //Thread.Sleep(9999999);
             return View();
         }
     }

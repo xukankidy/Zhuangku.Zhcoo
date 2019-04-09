@@ -1,27 +1,28 @@
 <CodeSnippet Format="1.1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
-  <Header>
-    <Title>zk_dom_loaded</Title>
-    <Author>zhuangku</Author>
-    <Shortcut>zk_dom_loaded</Shortcut>
-    <Description>Dom加载完毕</Description>
-    <SnippetTypes>
-      <SnippetType>Expansion</SnippetType>
-      <SnippetType>SurroundsWith</SnippetType>
-    </SnippetTypes>
-  </Header>
-  <Snippet>
-    <Declarations>
-      <Literal>
-        <ID>ModuleCode</ID>
-        <ToolTip>模块编码</ToolTip>
-        <Default>ModuleCode</Default>
-      </Literal>
-    </Declarations>
-    <Code Language="JavaScript">
-        <![CDATA['use strict';
-    $$(function () {
-    let $$root = $$('#Tab_Content_$ModuleCode$');
-    $end$
-});]]></Code>
-  </Snippet>
+    <Header>
+        <Title>zk_dom_loaded</Title>
+        <Author>zhuangku</Author>
+        <Shortcut>zk_dom_loaded</Shortcut>
+        <Description>Dom加载完毕</Description>
+        <SnippetTypes>
+            <SnippetType>Expansion</SnippetType>
+            <SnippetType>SurroundsWith</SnippetType>
+        </SnippetTypes>
+    </Header>
+    <Snippet>
+        <Declarations>
+            <Literal>
+                <ID>ModuleCode</ID>
+                <ToolTip>模块编码</ToolTip>
+                <Default>ModuleCode</Default>
+            </Literal>
+        </Declarations>
+        <Code Language="JavaScript">
+            <![CDATA['use strict';
+                $$(function () {
+                let $$root = $$('#Tab_Content_$ModuleCode$');
+                $end$
+            });]]>
+        </Code>
+    </Snippet>
 </CodeSnippet>

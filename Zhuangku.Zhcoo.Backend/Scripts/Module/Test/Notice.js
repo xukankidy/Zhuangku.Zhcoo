@@ -1,6 +1,7 @@
 ﻿'use strict';
 $(function () {
     let $root = $('#Tab_Content_tishikongjian');
+
     var $BtnAlert = $('#BtnAlert', $root);
     $BtnAlert.click(function () {
         let $this = $(this).blur();
@@ -25,6 +26,7 @@ $(function () {
             }
         });
     });
+
     var $BtnConfirm = $('#BtnConfirm', $root);
     $BtnConfirm.click(function () {
         let $this = $(this).blur();
@@ -41,6 +43,15 @@ $(function () {
             }
             , cancelCallback: function () {
             }
+        });
+    });
+
+    var $BtnMessage = $('#BtnMessage', $root);
+    $BtnMessage.click(function () {
+        let $this = $(this).blur();
+        zk.message({
+            type: 'success'
+            , message: '操作成功'
         });
     });
 });

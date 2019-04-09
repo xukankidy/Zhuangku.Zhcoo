@@ -7,8 +7,8 @@ let _zkFramework_ = {
     // 变量设置
     // ==========================================================================
     _zkSetting_: {
-        _iCssZIndex_: 10000//页面元素的Zindex值，堆放顺序，通过_fnGetCssZIndex_获取，不可直接访问
-        , _fnGetCssZIndex_: function () {
+        _iCssZIndex_: 10000//页面元素的ZIndex值，堆放顺序，通过_fnGetCssZIndex_获取，不可直接访问
+        , _fnGetCssZIndex_: function () {//始终返回最大的ZIndex值
             let setting = _zkFramework_._zkSetting_;
             return setting._iCssZIndex_++;
         }
@@ -21,9 +21,11 @@ let _zkFramework_ = {
         , _sTitleBarText_: '面板'//标题栏文字
         , _iTabViewAllowedMaxTabOpenedCount_: 5 //允许打开的最大选项卡数量
         , _iAnimationTransitionTime_: 200//动画过度时间
-        , _sLoadingText_: '请稍候...'
+        , _sLoadingText_: '请稍候...'//Loading面板文字
         , _iLoadingMaskAppearTime_: 1000//ajax请求出现加载进度面的时间
         , _iHttpAjaxTimeout_: 30000//ajax请求超时时间
+        , _sMessageType_: 'info'//消息框类型
+        , _iHideMessageTime_: 2000//消息框自动隐藏时间
         // ======================================================================
         // 初始化变量，可从外部接受参数
         // ======================================================================
@@ -195,8 +197,6 @@ let _zkFramework_ = {
         // 透明遮罩层 Mask
         // ======================================================================
         , _zkUiControlMask_: function () {
-            let setting = _zkFramework_._zkSetting_;
-
             let $mask = $('<div class="zk-mask"></div>')._zkGetZIndex_();
             return $mask;
         }
@@ -461,7 +461,77 @@ let _zkFramework_ = {
         // ======================================================================
         // 消息框 Message，可自动关闭
         // ======================================================================
-        , _zkUiMessage_: function (options) { }
+        , _zkUiMessage_: function (options) {
+            //快捷引用
+            let dom = _zkFramework_._zkDom_;
+            let control = _zkFramework_._zkUiControl_;
+            let setting = _zkFramework_._zkSetting_;
+
+            //设置默认值
+            let defaults = {
+                id: ''
+                , clsss: ''
+                , type: setting._sMessageType_
+                , icon: ''
+                , message: ''
+            };
+            options = $.extend(defaults, options);
+
+            //拼装元素
+            let $wrapper = control._zkUiControlBorder_({
+                id: options.id
+                , class: 'zk-message-wrapper'
+            });
+            let $icon = control._zkUiControlIcon_({
+                class: 'zk-message-icon'
+            });
+            let $message = control._zkUiControlText_({
+                text: options.message
+            });
+            switch (options.type) {
+                case 'info':
+                    $wrapper.addClass('zk-message-info');
+                    $icon.addClass(setting._sTitleBarIconPrefix_ + 'info');
+                    break;
+                case 'warning':
+                    $wrapper.addClass('zk-message-warning');
+                    $icon.addClass(setting._sTitleBarIconPrefix_ + 'warning');
+                    break;
+                case 'error':
+                    $wrapper.addClass('zk-message-error');
+                    $icon.addClass(setting._sTitleBarIconPrefix_ + 'error');
+                    break;
+                case 'success':
+                    $wrapper.addClass('zk-message-success');
+                    $icon.addClass(setting._sTitleBarIconPrefix_ + 'ok');
+                    break;
+                default:
+                    $wrapper.addClass('zk-message-info');
+                    $icon.addClass(setting._sTitleBarIconPrefix_ + 'info');
+                    break;
+            }
+            if (options.icon) {
+                $icon.addClass(setting._sTitleBarIconPrefix_ + options.icon);
+            }
+            $wrapper.append($icon).append($message)._zkGetZIndex_();
+            dom._zkBodyTag_.append($wrapper);
+
+            let fadeOutTimeout = 0;
+
+            $wrapper
+                .css({ 'margin-left': -($wrapper.outerWidth() / 2) })
+                .fadeIn(setting._iAnimationTransitionTime_, function () {
+                    fadeOutTimeout = setTimeout(hideMessage, setting._iHideMessageTime_);
+                })
+                .click(function () {
+                    clearTimeout(fadeOutTimeout);
+                    hideMessage();
+                });
+
+            function hideMessage() {
+                $wrapper._zkFadeOut_(setting._iAnimationTransitionTime_);
+            }
+        }
         // ======================================================================
         // 弹出提示框 Popup
         // ======================================================================
@@ -1367,7 +1437,7 @@ let zk = {
     , alert: _zkFramework_._zkUiComponent_._zkUiAlert_
     , confirm: _zkFramework_._zkUiComponent_._zkUiConfirm_
     , popup: _zkFramework_._zkUiComponent_._zkUiPopup_
-    , Message: _zkFramework_._zkUiComponent_._zkUiMessage_
+    , message: _zkFramework_._zkUiComponent_._zkUiMessage_
     , addTabItem: _zkFramework_._zkUiComponent_._zkUiTabView_._addTabItem_
     , post: _zkFramework_._zkHttp_._zkHttpPost_
     , get: _zkFramework_._zkHttp_._zkHttpGet_

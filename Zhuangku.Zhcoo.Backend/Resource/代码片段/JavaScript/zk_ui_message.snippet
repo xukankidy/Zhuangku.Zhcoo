@@ -1,0 +1,33 @@
+<CodeSnippet Format="1.1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <Header>
+        <Title>zk_ui_message</Title>
+        <Author>zhuangku</Author>
+        <Shortcut>zk_ui_message</Shortcut>
+        <Description>信息栏，可自动关闭</Description>
+        <SnippetTypes>
+            <SnippetType>Expansion</SnippetType>
+            <SnippetType>SurroundsWith</SnippetType>
+        </SnippetTypes>
+    </Header>
+    <Snippet>
+        <Declarations>
+            <Literal>
+                <ID>type</ID>
+                <ToolTip>类型</ToolTip>
+                <Default>info,warning,error,success</Default>
+            </Literal>
+            <Literal>
+                <ID>message</ID>
+                <ToolTip>说明文字</ToolTip>
+                <Default>操作成功</Default>
+            </Literal>
+        </Declarations>
+        <Code Language="JavaScript">
+            <![CDATA[zk.message({
+                  type: '$type$'
+                , message: '$message$'
+            });
+        $end$]]>
+        </Code>
+    </Snippet>
+</CodeSnippet>

@@ -545,9 +545,58 @@
 }
 
 /* =========================================
- * 询问框 Confirm
+ *  消息框 Message，可自动关闭
  * ========================================= */
+.zk-message-wrapper {
+    position: fixed;
+    padding: 4px 8px;
+    border-radius: 5px;
+    box-shadow: 0 0 4px #FFFFFF;
+    top: 40%;
+    left: 50%;
+    display: none;
+    cursor: pointer;
+}
 
+    .zk-message-wrapper .zk-message-icon {
+        margin-right: 8px;
+    }
+
+.zk-message-info {
+    border: solid 1px #438EB9;
+    background-color: #EEF5F9;
+}
+
+    .zk-message-info .zk-text {
+        color: #438EB9;
+    }
+
+.zk-message-warning {
+    border: solid 1px #ff6a00;
+    background-color: #EEF5F9;
+}
+
+    .zk-message-warning .zk-text {
+        color: #ff6a00;
+    }
+
+.zk-message-error {
+    border: solid 1px #FF0000;
+    background-color: #EEF5F9;
+}
+
+    .zk-message-error .zk-text {
+        color: #FF0000;
+    }
+
+.zk-message-success {
+    border: solid 1px #20a036;
+    background-color: #EEF5F9;
+}
+
+    .zk-message-success .zk-text {
+        color: #20a036;
+    }
 /* =========================================
  * 按钮样式 - 重写bootstrape
  * ========================================= */

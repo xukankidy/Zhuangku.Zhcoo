@@ -270,6 +270,7 @@
     <Content Include="Resource\代码片段\JavaScript\zk_dom_loaded.snippet" />
     <Content Include="Resource\代码片段\JavaScript\zk_ui_alert.snippet" />
     <Content Include="Resource\代码片段\JavaScript\zk_ui_confirm.snippet" />
+    <Content Include="Resource\代码片段\JavaScript\zk_ui_message.snippet" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zhuangku.Zhcoo.Domain\Zhuangku.Zhcoo.Domain.csproj">
