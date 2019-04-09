@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Zhuangku.Zhcoo.Backend.Controllers
 {
@@ -11,7 +10,7 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
         /// <returns></returns>
         public ActionResult Notice()
         {
-            Thread.Sleep(9999999);
+            //Thread.Sleep(9999999);
             return View();
         }
     }

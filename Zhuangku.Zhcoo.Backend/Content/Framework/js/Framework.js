@@ -23,7 +23,7 @@ let _zkFramework_ = {
         , _iAnimationTransitionTime_: 200//动画过度时间
         , _sLoadingText_: '请稍候...'
         , _iLoadingMaskAppearTime_: 1000//ajax请求出现加载进度面的时间
-        , _iHttpAjaxTimeout_: 5000//ajax请求超时时间
+        , _iHttpAjaxTimeout_: 30000//ajax请求超时时间
         // ======================================================================
         // 初始化变量，可从外部接受参数
         // ======================================================================
@@ -271,11 +271,11 @@ let _zkFramework_ = {
                 id: ''
                 , clsss: ''
                 , title: '信息'
-                , icon: setting._sTitleBarIcon_
+                , titleIcon: setting._sTitleBarIcon_
                 , bigIcon: setting._sPanelBigIcon_
                 , message: ''
                 , desc: ''
-                , okText: '确定'
+                , btnText: '确定'
                 , callback: null
             };
             options = $.extend(defaults, options);
@@ -285,7 +285,7 @@ let _zkFramework_ = {
             let panel = component._zkUiPanel_._create_({
                 class: 'zk-panel-alert'
                 , title: options.title
-                , icon: options.icon
+                , icon: options.titleIcon
                 , closeCallback: function () {
                     $overallMask._zkFadeOut_(setting._iAnimationTransitionTime_);
                     if (options.callback) {
@@ -331,7 +331,7 @@ let _zkFramework_ = {
             });
             let $okbtn = control._zkUiControlButton_({
                 class: 'btn btn-primary btn-sm zk-panel-alert-okbtn',
-                text: options.okText
+                text: options.btnText
             });
             $btnlist.append($okbtn);
             $okbtn.click(function () {
@@ -352,7 +352,112 @@ let _zkFramework_ = {
         // ======================================================================
         // 询问框 Confirm
         // ======================================================================
-        , _zkUiConfirm_: function (options) { }
+        , _zkUiConfirm_: function (options) {
+            //快捷引用
+            let dom = _zkFramework_._zkDom_;
+            let control = _zkFramework_._zkUiControl_;
+            let component = _zkFramework_._zkUiComponent_;
+            let setting = _zkFramework_._zkSetting_;
+
+            //设置默认值
+            let defaults = {
+                id: ''
+                , clsss: ''
+                , title: '信息'
+                , titleIcon: setting._sTitleBarIcon_
+                , bigIcon: setting._sPanelBigIcon_
+                , message: ''
+                , desc: ''
+                , okBtnText: '确定'
+                , cancelBtnText: '取消'
+                , OkCallback: null
+                , cancelCallback: null
+            };
+            options = $.extend(defaults, options);
+
+            //拼装元素
+            let $overallMask = control._zkUiControlMask_();
+            let panel = component._zkUiPanel_._create_({
+                class: 'zk-panel-alert'
+                , title: options.title
+                , icon: options.titleIcon
+                , closeCallback: function () {
+                    $overallMask._zkFadeOut_(setting._iAnimationTransitionTime_);
+                    if (options.cancelCallback) {
+                        options.cancelCallback();
+                    }
+                }
+            });
+            let $wrapper = panel._component_._wrapper_;
+            let $titlebar = panel._component_._titlebar_;
+            let $contentwrapper = panel._component_._contentwrapper_;
+
+            dom._zkBodyTag_.append($overallMask);
+            dom._zkBodyTag_.append($wrapper);
+
+            $wrapper.css({
+                'margin-top': -$wrapper.outerHeight() / 2
+                , 'margin-left': -$wrapper.outerWidth() / 2
+            });
+            let $bigicon = control._zkUiControlIcon_({
+                class: setting._sPanelBigIconPrefix_ + options.bigIcon + ' zk-panel-alert-bigicon'
+            });
+            let $infolist = control._zkUiControlBorder_({
+                class: 'zk-panel-alert-infolist'
+            });
+            let $messagelist = control._zkUiControlBorder_({
+                class: 'zk-panel-alert-messagelist'
+            });
+            let $message = control._zkUiControlText_({
+                class: 'zk-panel-alert-message'
+                , text: options.message
+            });
+            $messagelist.append($message);
+            let $desclist = control._zkUiControlBorder_({
+                class: 'zk-panel-alert-desclist'
+            });
+            let $desc = control._zkUiControlText_({
+                class: 'zk-panel-alert-desc'
+                , text: options.desc
+            });
+            $desclist.append($desc);
+            let $btnlist = control._zkUiControlBorder_({
+                class: 'zk-panel-alert-btnlist'
+            });
+            let $okBtn = control._zkUiControlButton_({
+                class: 'btn btn-primary btn-sm zk-panel-alert-okbtn',
+                text: options.okBtnText
+            }).css({ 'margin-right': 8 });
+            $btnlist.append($okBtn);
+            let $cancelBtn = control._zkUiControlButton_({
+                class: 'btn btn-outline-secondary btn-sm zk-panel-alert-cancelbtn',
+                text: options.cancelBtnText
+            });
+            $btnlist.append($cancelBtn);
+            $okBtn.click(function () {
+                $(this).blur();
+                $wrapper._zkFadeOut_(setting._iAnimationTransitionTime_, function () {
+                    $overallMask._zkFadeOut_(setting._iAnimationTransitionTime_);
+                    if (options.okCallback) {
+                        options.okCallback();
+                    }
+                })
+            });
+            $cancelBtn.click(function () {
+                $(this).blur();
+                $wrapper._zkFadeOut_(setting._iAnimationTransitionTime_, function () {
+                    $overallMask._zkFadeOut_(setting._iAnimationTransitionTime_);
+                    if (options.cancelCallback) {
+                        options.cancelCallback();
+                    }
+                })
+            });
+            $infolist.append($messagelist).append($desclist).append($btnlist);
+            $contentwrapper.append($bigicon).append($infolist);
+            $wrapper.fadeIn(setting._iAnimationTransitionTime_, function () {
+                $cancelBtn.focus();
+            });
+        }
         // ======================================================================
         // 消息框 Message，可自动关闭
         // ======================================================================
