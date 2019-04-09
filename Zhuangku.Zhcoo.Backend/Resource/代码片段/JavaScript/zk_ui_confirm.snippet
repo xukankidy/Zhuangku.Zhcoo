@@ -1,0 +1,67 @@
+<CodeSnippet Format="1.1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <Header>
+    <Title>zk_ui_confirm</Title>
+    <Author>zhuangku</Author>
+    <Shortcut>zk_ui_confirm</Shortcut>
+    <Description>询问框</Description>
+    <SnippetTypes>
+      <SnippetType>Expansion</SnippetType>
+      <SnippetType>SurroundsWith</SnippetType>
+    </SnippetTypes>
+  </Header>
+  <Snippet>
+    <Declarations>
+      <Literal>
+        <ID>title</ID>
+        <ToolTip>标题栏文字</ToolTip>
+        <Default>信息</Default>
+      </Literal>
+        <Literal>
+            <ID>icon</ID>
+            <ToolTip>标题栏图标</ToolTip>
+            <Default>info</Default>
+        </Literal>
+        <Literal>
+            <ID>bigIcon</ID>
+            <ToolTip>大图标</ToolTip>
+            <Default>question</Default>
+        </Literal>
+        <Literal>
+            <ID>message</ID>
+            <ToolTip>说明文字</ToolTip>
+            <Default></Default>
+        </Literal>
+        <Literal>
+            <ID>desc</ID>
+            <ToolTip>详细说明</ToolTip>
+            <Default></Default>
+        </Literal>
+        <Literal>
+            <ID>okText</ID>
+            <ToolTip>确定按钮文字</ToolTip>
+            <Default>确定</Default>
+        </Literal>
+        <Literal>
+            <ID>cancelText</ID>
+            <ToolTip>取消按钮文字</ToolTip>
+            <Default>取消</Default>
+        </Literal>
+    </Declarations>
+    <Code Language="JavaScript">
+        <![CDATA[zk.confirm({
+                title: '$title$'
+                , titleIcon: '$icon$'
+                , bigIcon: '$bigIcon$'
+                , message: '$message$'
+                , desc: '$desc$'
+                , okBtnText: '$okText$'
+                , cancelBtnText: '$cancelText$'
+                , okCallback: function () {
+                    $end$
+                }
+                , cancelCallback: function () {
+                
+                }
+        });]]></Code>
+  </Snippet>
+</CodeSnippet>

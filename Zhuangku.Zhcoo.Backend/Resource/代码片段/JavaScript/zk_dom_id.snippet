@@ -1,0 +1,24 @@
+<CodeSnippet Format="1.1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <Header>
+    <Title>zk_dom_id</Title>
+    <Author>zhuangku</Author>
+    <Shortcut>zk_dom_id</Shortcut>
+    <Description>查找指定编号的元素</Description>
+    <SnippetTypes>
+      <SnippetType>Expansion</SnippetType>
+      <SnippetType>SurroundsWith</SnippetType>
+    </SnippetTypes>
+  </Header>
+  <Snippet>
+    <Declarations>
+      <Literal>
+        <ID>DomID</ID>
+        <ToolTip>元素编号</ToolTip>
+        <Default>DomID</Default>
+      </Literal>
+    </Declarations>
+    <Code Language="JavaScript">
+        <![CDATA[var $$$DomID$ = $$('#$DomID$', $$root);
+        $end$]]></Code>
+  </Snippet>
+</CodeSnippet>
