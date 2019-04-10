@@ -54,4 +54,14 @@ $(function () {
             , message: '操作成功'
         });
     });
+
+    var $BtnPopup = $('#BtnPopup', $root);
+    $BtnPopup.click(function () {
+        let $this = $(this).blur();
+        zk.popup({
+            text: '这是一条消息'
+            , url: 'http://www.baidu.com'
+            , type: 'tab'
+        });
+    });
 });

@@ -504,6 +504,8 @@
 .zk-panel-contentwrapper {
     background-color: #FFFFFF;
     position: relative;
+    height: 100%;
+    overflow-y: auto;
 }
 /* =========================================
  * 信息框 Alert
@@ -597,6 +599,36 @@
     .zk-message-success .zk-text {
         color: #20a036;
     }
+/* =========================================
+ * 弹出提示框 Popup
+ * ========================================= */
+.zk-panel-popup {
+    width: 400px;
+    height: 300px;
+    bottom: -410px;
+    right: 10px;
+    position: fixed;
+    transition: bottom 0.5s;
+}
+.zk-panel-popup.zk-on {
+    bottom: 10px;
+}
+.zk-panel-popup-item-wrapper {
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+    .zk-panel-popup-item-wrapper:hover {
+        background-color: #fdf4bf;
+        margin: 1px;
+        padding: 3px 7px;
+    }
+.zk-panel-popup-item-icon {
+    margin-right:8px;
+}
+.zk-panel-popup-item-text {
+    margin-right: 8px;
+}
 /* =========================================
  * 按钮样式 - 重写bootstrape
  * ========================================= */

@@ -26,6 +26,10 @@ let _zkFramework_ = {
         , _iHttpAjaxTimeout_: 30000//ajax请求超时时间
         , _sMessageType_: 'info'//消息框类型
         , _iHideMessageTime_: 2000//消息框自动隐藏时间
+        , _sPopupPanelTitle_: '系统通知'
+        , _sPopupPanelTitleIcon_: 'speaker'
+        , _sPopupPanelItemIcon_: 'speaker'
+        , _componentPopup_: null
         // ======================================================================
         // 初始化变量，可从外部接受参数
         // ======================================================================
@@ -535,7 +539,84 @@ let _zkFramework_ = {
         // ======================================================================
         // 弹出提示框 Popup
         // ======================================================================
-        , _zkUiPopup_: function (options) { }
+        , _zkUiPopup_: function (options) {
+            //快捷引用
+            let dom = _zkFramework_._zkDom_;
+            let control = _zkFramework_._zkUiControl_;
+            let component = _zkFramework_._zkUiComponent_;
+            let setting = _zkFramework_._zkSetting_;
+
+            //设置默认值
+            let defaults = {
+                id: ''
+                , clsss: ''
+                , icon: setting._sPopupPanelItemIcon_
+                , text: ''
+                , type: 'tab'
+                , url: ''
+            };
+            options = $.extend(defaults, options);
+
+            //拼装面板
+            let panel = null;
+            if (setting._componentPopup_) {
+                panel = setting._componentPopup_;
+            } else {
+                panel = component._zkUiPanel_._create_({
+                    class: 'zk-panel-popup'
+                    , title: setting._sPopupPanelTitle_
+                    , icon: setting._sPopupPanelTitleIcon_
+                });
+                setting._componentPopup_ = panel;
+            }
+            let $wrapper = panel._component_._wrapper_;
+            let $contentwrapper = panel._component_._contentwrapper_;
+
+            //拼装条目
+            let $itemWrapper = control._zkUiControlBorder_({
+                class: 'zk-panel-popup-item-wrapper'
+            });
+            let $itemIcon = control._zkUiControlIcon_({
+                class: setting._sTitleBarIconPrefix_ + options.icon + ' zk-panel-popup-item-icon'
+            });
+            let $itemText = control._zkUiControlText_({
+                class: 'zk-panel-popup-item-text'
+                , text: options.text
+            });
+            $itemWrapper.append($itemIcon).append($itemText).click(function () {
+                let $this = $(this);
+                $this._zkFadeOut_(setting._iAnimationTransitionTime_, function () {
+                    if ($contentwrapper.find('.zk-panel-popup-item-wrapper').length == 0) {
+                        $wrapper._zkFadeOut_(setting._iAnimationTransitionTime_, function () {
+                            setting._componentPopup_ = null;
+                        });
+                    }
+                });
+                switch (options.type) {
+                    case 'tab':
+                        component._zkUiTabView_._addTabItem_({
+                            id: 'ZkMyHomePage'
+                            , icon: 'desktop'
+                            , title: '我的首页'
+                            , isIframe: true
+                            , isClosable: false
+                            , src: 'http://www.baidu.com/'
+                        });
+                        break;
+                    case 'link':
+                        window.open(options.url);
+                        break;
+                    default:
+                }
+            });
+            $contentwrapper.append($itemWrapper);
+
+            dom._zkBodyTag_.append($wrapper);
+            setTimeout(showPopup, 100);
+            function showPopup() {
+                $wrapper.addClass('zk-on');
+            }
+        }
         // ======================================================================
         // 标签视图 TabView
         // ======================================================================
