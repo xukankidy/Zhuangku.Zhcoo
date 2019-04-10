@@ -566,6 +566,9 @@ let _zkFramework_ = {
                     class: 'zk-panel-popup'
                     , title: setting._sPopupPanelTitle_
                     , icon: setting._sPopupPanelTitleIcon_
+                    , closeCallback: function () {
+                        setting._componentPopup_ = null;
+                    }
                 });
                 setting._componentPopup_ = panel;
             }
