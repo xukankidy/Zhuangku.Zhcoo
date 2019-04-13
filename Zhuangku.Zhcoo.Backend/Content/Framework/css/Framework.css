@@ -610,24 +610,79 @@
     position: fixed;
     transition: bottom 0.5s;
 }
-.zk-panel-popup.zk-on {
-    bottom: 10px;
-}
+
+    .zk-panel-popup.zk-on {
+        bottom: 10px;
+    }
+
 .zk-panel-popup-item-wrapper {
     padding: 4px 8px;
     cursor: pointer;
     transition: background-color 0.5s;
 }
+
     .zk-panel-popup-item-wrapper:hover {
         background-color: #fdf4bf;
         margin: 1px;
         padding: 3px 7px;
     }
+
 .zk-panel-popup-item-icon {
-    margin-right:8px;
+    margin-right: 8px;
 }
+
 .zk-panel-popup-item-text {
     margin-right: 8px;
+}
+/* =========================================
+ * 日期选择器 DateTimePicker
+ * ========================================= */
+.zk-txt-datetimepicker {
+    cursor: pointer;
+    width: 192px!important;
+    height: 28px;
+    background: transparent url(../image/IconDate.png) 100% 50% no-repeat;
+}
+    .zk-txt-datetimepicker.zk-txt-datetimepicker-date {
+        width: 130px !important;
+    }
+
+.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu {
+    box-shadow: 4px 4px 4px #AAAAAA;
+}
+
+.prev > .glyphicon.glyphicon-arrow-left {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: transparent url(../image/ArrowLeft.png) 50% 50% no-repeat;
+    opacity: 0.5;
+    transition: opacity 0.5s;
+}
+
+.prev:hover > .glyphicon.glyphicon-arrow-left {
+    opacity: 1;
+}
+
+.next > .glyphicon.glyphicon-arrow-right {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: transparent url(../image/ArrowRight.png) 50% 50% no-repeat;
+    opacity: 0.5;
+    transition: opacity 0.5s;
+}
+
+.next:hover > .glyphicon.glyphicon-arrow-right {
+    opacity: 1;
+}
+
+.input-group-append {
+    height:28px;
+    margin-right: -1px;
+}
+.input-group-text {
+    font-size: 12px;
 }
 /* =========================================
  * 按钮样式 - 重写bootstrape
@@ -635,9 +690,19 @@
 .btn {
     font-size: 12px;
     font-family: "SimSun";
+    height: 28px;
+    line-height: 14px;
 }
 
 .btn-primary {
     background-color: #438EB9;
     border-color: #438EB9;
+}
+
+.btn > .zk-icon {
+    margin-right: 8px;
+}
+
+.row {
+    margin-bottom: 8px;
 }

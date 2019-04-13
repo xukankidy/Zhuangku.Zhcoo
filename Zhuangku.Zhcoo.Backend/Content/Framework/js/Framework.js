@@ -1361,6 +1361,26 @@ let _zkFramework_ = {
                 _contentwrapper_: null
             }
         }
+        // ======================================================================
+        // 日期选择器 DateTimePicker
+        // ======================================================================
+        , _zkDateTiemPicker_: function (options) {
+            if (!options.jqueryObj || options.jqueryObj.length == 0) {
+                console.log('没有选择到合适的DateTimePicker插件');
+                return;
+            }
+
+            let defaults = {
+                language: 'zh-CN'
+                , autoclose: true
+                , minView: 2
+                , todayBtn: true
+            };
+            options = $.extend(defaults, options);
+
+            let $Dtpicker = options.jqueryObj.datetimepicker(options);
+            return $Dtpicker;
+        }
     }
     // ==========================================================================
     // Ajax请求快捷方式
@@ -1525,6 +1545,7 @@ let zk = {
     , addTabItem: _zkFramework_._zkUiComponent_._zkUiTabView_._addTabItem_
     , post: _zkFramework_._zkHttp_._zkHttpPost_
     , get: _zkFramework_._zkHttp_._zkHttpGet_
+    , datetimepicker: _zkFramework_._zkUiComponent_._zkDateTiemPicker_
 };
 
 // ==================================================================================

@@ -1,0 +1,33 @@
+<CodeSnippet Format="1.1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <Header>
+        <Title>zk_ui_datetimepicker</Title>
+        <Author>zhuangku</Author>
+        <Shortcut>zk_ui_datetimepicker</Shortcut>
+        <Description>日期选择器</Description>
+        <SnippetTypes>
+            <SnippetType>Expansion</SnippetType>
+            <SnippetType>SurroundsWith</SnippetType>
+        </SnippetTypes>
+    </Header>
+    <Snippet>
+        <Declarations>
+            <Literal>
+                <ID>DomID</ID>
+                <ToolTip>元素编号</ToolTip>
+                <Default>DomID</Default>
+            </Literal>
+            <Literal>
+                <ID>format</ID>
+                <ToolTip>显示样式</ToolTip>
+                <Default>yyyy-mm-dd hh:ii:ss</Default>
+            </Literal>
+        </Declarations>
+        <Code Language="JavaScript">
+            <![CDATA[let $$$DomID$ = zk.datetimepicker({
+                jqueryObj: $$('#$DomID$', $$root)
+                , format: '$format$'
+            });
+    $end$]]>
+        </Code>
+    </Snippet>
+</CodeSnippet>
