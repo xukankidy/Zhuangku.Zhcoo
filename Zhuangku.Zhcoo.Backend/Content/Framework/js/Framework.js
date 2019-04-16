@@ -1381,6 +1381,23 @@ let _zkFramework_ = {
             let $Dtpicker = options.jqueryObj.datetimepicker(options);
             return $Dtpicker;
         }
+        // ======================================================================
+        // Select选择器 Chosen
+        // ======================================================================
+        , _zkChosen_: function (options) {
+            if (!options.jqueryObj || options.jqueryObj.length == 0) {
+                console.log('没有选择到合适的chosen插件');
+                return;
+            }
+
+            let defaults = {
+                no_results_text: "您搜索的内容不存在"
+            };
+            options = $.extend(defaults, options);
+
+            let $chosen = options.jqueryObj.chosen(options);
+            return $chosen;
+        }
     }
     // ==========================================================================
     // Ajax请求快捷方式
@@ -1546,6 +1563,7 @@ let zk = {
     , post: _zkFramework_._zkHttp_._zkHttpPost_
     , get: _zkFramework_._zkHttp_._zkHttpGet_
     , datetimepicker: _zkFramework_._zkUiComponent_._zkDateTiemPicker_
+    , chosen: _zkFramework_._zkUiComponent_._zkChosen_
 };
 
 // ==================================================================================

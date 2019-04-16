@@ -639,10 +639,11 @@
  * ========================================= */
 .zk-txt-datetimepicker {
     cursor: pointer;
-    width: 192px!important;
+    width: 192px !important;
     height: 28px;
     background: transparent url(../image/IconDate.png) 100% 50% no-repeat;
 }
+
     .zk-txt-datetimepicker.zk-txt-datetimepicker-date {
         width: 130px !important;
     }
@@ -678,11 +679,29 @@
 }
 
 .input-group-append {
-    height:28px;
+    height: 28px;
     margin-right: -1px;
 }
+
 .input-group-text {
     font-size: 12px;
+}
+/* =========================================
+ * Chosen样式 - 重写
+ * ========================================= */
+.chosen-container-single .chosen-single {
+    background: none;
+    height: 28px;
+    line-height: 28px;
+}
+.chosen-container-multi .chosen-choices{
+    border-radius: 4px;
+}
+
+.chosen-container {
+    height: 28px;
+    font-size: 12px;
+    font-family: "SimSun";
 }
 /* =========================================
  * 按钮样式 - 重写bootstrape

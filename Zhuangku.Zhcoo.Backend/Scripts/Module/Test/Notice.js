@@ -69,4 +69,16 @@ $(function () {
             let $this = $(this).blur();
             alert($TxtSearchEndTime.val());
         });
+    let $CityId = zk.chosen({
+        jqueryObj: $('#CityId', $root)
+    });
+    let $CityId1 = zk.chosen({
+        jqueryObj: $('#CityId1', $root)
+    });
+
+    let $BtnOk = $('#BtnOk', $root)
+        .click(function () {
+            let $this = $(this).blur();
+            alert($CityId.val());
+        });
 });
