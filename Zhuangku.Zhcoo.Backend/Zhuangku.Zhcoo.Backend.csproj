@@ -137,8 +137,10 @@
     <Content Include="Content\Framework\image\ArrowRight.png" />
     <Content Include="Content\Framework\image\IconDate.png" />
     <Content Include="Content\Framework\image\ZkSpriteIcon.png" />
+    <Content Include="Content\Framework\js\cav.js" />
     <Content Include="Content\Framework\js\Framework.js" />
     <Content Include="Content\Framework\js\Framework.min.js" />
+    <Content Include="Content\Framework\js\QQLoginBackground.js" />
     <Content Include="Content\Plugin\bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="Content\Plugin\bootstrap\css\bootstrap-reboot.min.css" />
     <Content Include="Content\Plugin\bootstrap\css\bootstrap.min.css" />
