@@ -26,20 +26,3 @@ $(function () {
             });
         });
 });
-
-'use strict';
-$(function () {
-    let $root = $('#Tab_Content_PanelModalCode');
-    let('.zk-panel-titlebarOption', closePanelModal.click();
-
-});
-
-'use strict';
-$(function () {
-    let $root = $('#Tab_Content_PanelModalCode');
-    let $closePanelModal = $('.zk-panel-titlebarOption', $root);
-    function closePanelModal() {
-        $closePanelModal.click();
-    }
-
-});
