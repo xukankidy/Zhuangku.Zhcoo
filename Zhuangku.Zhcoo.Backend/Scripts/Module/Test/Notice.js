@@ -81,4 +81,14 @@ $(function () {
             let $this = $(this).blur();
             alert($CityId.val());
         });
+    let $BtnOpenModal = $('#BtnOpenModal', $root)
+        .click(function () {
+            let $this = $(this).blur();
+            zk.modal({
+                id: 'TestModal'
+                , url: '/Test/Modal/'
+                , title: '模式弹窗'
+                , titleIcon: 'info'
+            });
+        });
 });

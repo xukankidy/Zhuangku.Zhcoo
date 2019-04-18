@@ -250,6 +250,7 @@
     <Content Include="Resource\IconGroup\px84x80\radar.png" />
     <Content Include="Scripts\Module\Framework\Index.js" />
     <Content Include="Scripts\Module\Login\Index.js" />
+    <Content Include="Scripts\Module\Test\Modal.js" />
     <Content Include="Scripts\Module\Test\Notice.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -280,6 +281,9 @@
     <Content Include="Resource\代码片段\JavaScript\zk_ui_datetimepicker.snippet" />
     <Content Include="Resource\Js插件\chosen_v1.8.7.zip" />
     <Content Include="Resource\代码片段\JavaScript\zk_ui_chosen.snippet" />
+    <Content Include="Views\Test\Modal.cshtml" />
+    <Content Include="Resource\代码片段\JavaScript\zk_dom_loaded_modal.snippet" />
+    <Content Include="Resource\代码片段\JavaScript\zk_ui_modal.snippet" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zhuangku.Zhcoo.Domain\Zhuangku.Zhcoo.Domain.csproj">

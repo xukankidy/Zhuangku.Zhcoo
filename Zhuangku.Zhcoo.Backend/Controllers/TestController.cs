@@ -12,5 +12,9 @@ namespace Zhuangku.Zhcoo.Backend.Controllers
         {
             return View();
         }
+
+        public ActionResult Modal() {
+            return View();
+        }
     }
 }

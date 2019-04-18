@@ -1366,7 +1366,7 @@ let _zkFramework_ = {
         // ======================================================================
         , _zkDateTiemPicker_: function (options) {
             if (!options.jqueryObj || options.jqueryObj.length == 0) {
-                console.log('没有选择到合适的DateTimePicker插件');
+                console.log('没有选择到合适的DateTimePicker对象');
                 return;
             }
 
@@ -1386,7 +1386,7 @@ let _zkFramework_ = {
         // ======================================================================
         , _zkChosen_: function (options) {
             if (!options.jqueryObj || options.jqueryObj.length == 0) {
-                console.log('没有选择到合适的chosen插件');
+                console.log('没有选择到合适的chosen对象');
                 return;
             }
 
@@ -1397,6 +1397,62 @@ let _zkFramework_ = {
 
             let $chosen = options.jqueryObj.chosen(options);
             return $chosen;
+        }
+        // ======================================================================
+        // 模式窗口 Modal
+        // ======================================================================
+        , _zkUiModal_: function (options) {
+            let httpGet = _zkFramework_._zkHttp_._zkHttpGet_;
+            let dom = _zkFramework_._zkDom_;
+            let control = _zkFramework_._zkUiControl_;
+            let component = _zkFramework_._zkUiComponent_;
+            let setting = _zkFramework_._zkSetting_;
+
+            let defaults = {
+                id: ''
+                , url: ''
+                , html: ''
+                , title: '模式弹窗'
+                , titleIcon: 'file'
+            };
+            options = $.extend(defaults, options);
+
+            let $overallMask = control._zkUiControlMask_();
+            let panel = component._zkUiPanel_._create_({
+                id: 'Panel_Modal_' + options.id
+                , class: 'zk-panel-modal'
+                , title: options.title
+                , icon: options.titleIcon
+                , closeCallback: function () {
+                    $overallMask._zkFadeOut_(setting._iAnimationTransitionTime_);
+                    if (options.callback) {
+                        options.callback();
+                    }
+                }
+            });
+            let $wrapper = panel._component_._wrapper_;
+            let $titlebar = panel._component_._titlebar_;
+            let $contentwrapper = panel._component_._contentwrapper_;
+
+            if (options.url) {
+                httpGet({
+                    url: options.url
+                    , dataType: 'html'
+                    , mask: true
+                    , loadingTxt: '页面加载中'
+                    , done: function (html) {
+                        $contentwrapper.append(html);
+                        dom._zkBodyTag_.append($overallMask);
+                        dom._zkBodyTag_.append($wrapper);
+                        $wrapper.css({
+                            'margin-top': -$wrapper.outerHeight() / 2
+                            , 'margin-left': -$wrapper.outerWidth() / 2
+                        }).fadeIn(setting._iAnimationTransitionTime_);
+                    }
+                });
+            } else {
+
+            }
         }
     }
     // ==========================================================================
@@ -1454,13 +1510,12 @@ let _zkFramework_ = {
                     }
                 })
                 .fail(function (dataObj) {
-                    console.log(dataObj);
                     if (dataObj.fail) {
                         let errorMessage = '请求失败，请稍候重试';
                         if (dataObj.statusText === 'timeout') {
                             errorMessage = '请求超时，请重试';
-                        } else if (dataObj.statusText === 'error') {
-                            if (data.status === 404) {
+                        } else {
+                            if (dataObj.status === 404) {
                                 errorMessage = '你请求的资源不存在';
                             } else if (dataObj.status === 500) {
                                 errorMessage = '服务器发生错误，请稍候重试';
@@ -1559,6 +1614,7 @@ let zk = {
     , confirm: _zkFramework_._zkUiComponent_._zkUiConfirm_
     , popup: _zkFramework_._zkUiComponent_._zkUiPopup_
     , message: _zkFramework_._zkUiComponent_._zkUiMessage_
+    , modal: _zkFramework_._zkUiComponent_._zkUiModal_
     , addTabItem: _zkFramework_._zkUiComponent_._zkUiTabView_._addTabItem_
     , post: _zkFramework_._zkHttp_._zkHttpPost_
     , get: _zkFramework_._zkHttp_._zkHttpGet_

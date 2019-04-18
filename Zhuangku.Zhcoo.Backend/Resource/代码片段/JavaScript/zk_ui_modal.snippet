@@ -1,0 +1,44 @@
+<CodeSnippet Format="1.1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <Header>
+    <Title>zk_ui_modal</Title>
+    <Author>zhuangku</Author>
+    <Shortcut>zk_ui_modal</Shortcut>
+    <Description>模式弹框</Description>
+    <SnippetTypes>
+      <SnippetType>Expansion</SnippetType>
+      <SnippetType>SurroundsWith</SnippetType>
+    </SnippetTypes>
+  </Header>
+  <Snippet>
+    <Declarations>
+      <Literal>
+        <ID>id</ID>
+        <ToolTip>模式弹窗编码</ToolTip>
+        <Default>PanelModalCode</Default>
+      </Literal>
+      <Literal>
+        <ID>url</ID>
+        <ToolTip>页面地址</ToolTip>
+        <Default>url</Default>
+      </Literal>
+      <Literal>
+        <ID>title</ID>
+        <ToolTip>标题栏文字</ToolTip>
+        <Default>模式弹窗</Default>
+      </Literal>
+      <Literal>
+        <ID>icon</ID>
+        <ToolTip>标题栏图标</ToolTip>
+        <Default>info</Default>
+      </Literal>
+    </Declarations>
+    <Code Language="JavaScript">
+      <![CDATA[zk.modal({
+                id: '$id$'
+                , url: '$url$'
+                , title: '$title$'
+                , titleIcon: '$icon$'
+            });]]>
+    </Code>
+  </Snippet>
+</CodeSnippet>

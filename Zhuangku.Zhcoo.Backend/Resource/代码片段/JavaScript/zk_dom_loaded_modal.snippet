@@ -1,0 +1,32 @@
+<CodeSnippet Format="1.1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <Header>
+        <Title>zk_dom_loaded_modal</Title>
+        <Author>zhuangku</Author>
+        <Shortcut>zk_dom_loaded_modal</Shortcut>
+        <Description>模式弹窗加载完毕</Description>
+        <SnippetTypes>
+            <SnippetType>Expansion</SnippetType>
+            <SnippetType>SurroundsWith</SnippetType>
+        </SnippetTypes>
+    </Header>
+    <Snippet>
+        <Declarations>
+            <Literal>
+                <ID>PanelModalCode</ID>
+                <ToolTip>模式弹窗编码</ToolTip>
+                <Default>PanelModalCode</Default>
+            </Literal>
+        </Declarations>
+        <Code Language="JavaScript">
+            <![CDATA['use strict';
+                $$(function () {
+                let $$root = $$('#Tab_Content_$PanelModalCode$');
+                let $$closePanelModal = $$('.zk-panel-titlebarOption', $$root);
+                function closePanelModal() {
+                    $$closePanelModal.click();
+                }
+                $end$
+            });]]>
+        </Code>
+    </Snippet>
+</CodeSnippet>
