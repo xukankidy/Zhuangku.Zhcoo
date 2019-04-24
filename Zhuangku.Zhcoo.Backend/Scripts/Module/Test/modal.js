@@ -2,6 +2,8 @@
 $(function () {
     let $root = $('#Panel_Modal_TestModal');
     let $closePanelModal = $('.zk-panel-titlebarOption', $root);
+    let callback = zk.callback.pop();
+
     function closePanelModal() {
         $closePanelModal.click();
     }
@@ -9,6 +11,7 @@ $(function () {
         .click(function () {
             let $this = $(this).blur();
             closePanelModal();
+            callback();
         });
     let $BtnSuccess = $('#BtnSuccess', $root)
         .click(function () {

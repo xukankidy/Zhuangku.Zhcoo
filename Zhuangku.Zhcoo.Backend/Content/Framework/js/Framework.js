@@ -30,6 +30,7 @@ let _zkFramework_ = {
         , _sPopupPanelTitleIcon_: 'speaker'
         , _sPopupPanelItemIcon_: 'speaker'
         , _componentPopup_: null
+        , _arrCallback_: []
         // ======================================================================
         // 初始化变量，可从外部接受参数
         // ======================================================================
@@ -1414,6 +1415,7 @@ let _zkFramework_ = {
                 , html: ''
                 , title: '模式弹窗'
                 , titleIcon: 'file'
+                , callback: null
             };
             options = $.extend(defaults, options);
 
@@ -1447,11 +1449,14 @@ let _zkFramework_ = {
                         $wrapper.css({
                             'margin-top': -$wrapper.outerHeight() / 2
                             , 'margin-left': -$wrapper.outerWidth() / 2
-                        }).fadeIn(setting._iAnimationTransitionTime_);
+                        }).fadeIn(setting._iAnimationTransitionTime_, function () {
+                            if (options.callback) {
+                                setting._arrCallback_.push(options.callback);
+                            }
+                        });
                     }
                 });
             } else {
-
             }
         }
     }
@@ -1620,6 +1625,7 @@ let zk = {
     , get: _zkFramework_._zkHttp_._zkHttpGet_
     , datetimepicker: _zkFramework_._zkUiComponent_._zkDateTiemPicker_
     , chosen: _zkFramework_._zkUiComponent_._zkChosen_
+    , callback: _zkFramework_._zkSetting_._arrCallback_
 };
 
 // ==================================================================================

@@ -22,6 +22,7 @@
                 $$(function () {
                 let $$root = $$('#Panel_Modal_$PanelModalCode$');
                 let $$closePanelModal = $$('.zk-panel-titlebarOption', $$root);
+                let callback = zk.callback.pop();
                 function closePanelModal() {
                     $$closePanelModal.click();
                 }

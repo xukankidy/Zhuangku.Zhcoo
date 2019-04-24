@@ -224,8 +224,10 @@
     <Content Include="Resource\IconGroup\px16\unlock.png" />
     <Content Include="Resource\IconGroup\px16\up.png" />
     <Content Include="Resource\IconGroup\px16\warning.png" />
+    <Content Include="Resource\IconGroup\px24\key.png" />
     <Content Include="Resource\IconGroup\px24\list.png" />
     <Content Include="Resource\IconGroup\px24\menu.png" />
+    <Content Include="Resource\IconGroup\px24\power.png" />
     <Content Include="Resource\IconGroup\px24\refresh.png" />
     <Content Include="Resource\IconGroup\px64\bulb.png" />
     <Content Include="Resource\IconGroup\px64\error.png" />
@@ -284,6 +286,7 @@
     <Content Include="Views\Test\Modal.cshtml" />
     <Content Include="Resource\代码片段\JavaScript\zk_dom_loaded_modal.snippet" />
     <Content Include="Resource\代码片段\JavaScript\zk_ui_modal.snippet" />
+    <Content Include="Resource\代码片段\JavaScript\zk_ui_addTab.snippet" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zhuangku.Zhcoo.Domain\Zhuangku.Zhcoo.Domain.csproj">

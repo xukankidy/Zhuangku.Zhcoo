@@ -1,0 +1,39 @@
+<CodeSnippet Format="1.1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <Header>
+        <Title>zk_ui_addTab</Title>
+        <Author>zhuangku</Author>
+        <Shortcut>zk_ui_addTab</Shortcut>
+        <Description>打开一个tab，并聚焦</Description>
+        <SnippetTypes>
+            <SnippetType>Expansion</SnippetType>
+            <SnippetType>SurroundsWith</SnippetType>
+        </SnippetTypes>
+    </Header>
+    <Snippet>
+        <Declarations>
+            <Literal>
+                <ID>Id</ID>
+                <ToolTip>Tab编号</ToolTip>
+                <Default>Tab编号</Default>
+            </Literal>
+            <Literal>
+                <ID>title</ID>
+                <ToolTip>Tab标题</ToolTip>
+                <Default>Tab标题</Default>
+            </Literal>
+            <Literal>
+              <ID>src</ID>
+              <ToolTip>打开路径</ToolTip>
+              <Default>打开路径</Default>
+            </Literal>
+        </Declarations>
+        <Code Language="JavaScript">
+            <![CDATA[zk.addTabItem({
+                id: '$Id$'
+              , title: '$title$'
+              , src: '$src$'
+            });
+        $end$]]>
+        </Code>
+    </Snippet>
+</CodeSnippet>

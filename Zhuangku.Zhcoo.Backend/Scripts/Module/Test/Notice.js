@@ -89,6 +89,9 @@ $(function () {
                 , url: '/Test/Modal/'
                 , title: '模式弹窗'
                 , titleIcon: 'info'
+                , callback: function () {
+                    $this.text('nihao');
+                }
             });
         });
 });
