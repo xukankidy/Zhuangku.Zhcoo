@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/Plugin/bootstrap/css/bootstrap-reboot.min.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/Plugin/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/Plugin/bootstrap/css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Framework/css/Icon.css" />
     <script type="text/javascript" src="~/Content/Plugin/jquery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="~/Content/Plugin/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Content/Plugin/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -42,6 +43,16 @@
             font-size: 18px;
             color: #438EB9;
         }
+
+        .col-sm-12 .zk-icon {
+            position: absolute;
+            top: 11px;
+            right: 20px;
+        }
+
+        .col-sm-12 .form-control {
+            padding-right: 25px;
+        }
     </style>
 </head>
 <body>
@@ -55,17 +66,19 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <input id="Username" name="Username" type="text" class="form-control" placeholder="用户名..." />
+                        <input id="Username" name="Username" type="text" class="form-control" placeholder="用户名..." value="admin" />
+                        <i class="zk-icon zk-icon-16-man"></i>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 18px;">
+                    <div class="col-sm-12">
+                        <input id="Password" name="Password" type="password" class="form-control" placeholder="密码..." value="123456" />
+                        <i class="zk-icon zk-icon-16-key"></i>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <input id="Password" name="Password" type="password" class="form-control" placeholder="密码..." />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <button id="BtnLogin" type="button" class="btn btn-primary">登陆</button>
+                        <button id="BtnLogin" type="button" class="btn btn-primary btn-block">登陆</button>
                     </div>
                 </div>
             </form>

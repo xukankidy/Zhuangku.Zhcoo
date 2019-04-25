@@ -26,11 +26,11 @@ let _zkFramework_ = {
         , _iHttpAjaxTimeout_: 30000//ajax请求超时时间
         , _sMessageType_: 'info'//消息框类型
         , _iHideMessageTime_: 2000//消息框自动隐藏时间
-        , _sPopupPanelTitle_: '系统通知'
-        , _sPopupPanelTitleIcon_: 'speaker'
-        , _sPopupPanelItemIcon_: 'speaker'
-        , _componentPopup_: null
-        , _arrCallback_: []
+        , _sPopupPanelTitle_: '系统通知'//弹出提示框标题文字
+        , _sPopupPanelTitleIcon_: 'speaker'//弹出提示框标题图标
+        , _sPopupPanelItemIcon_: 'speaker'//弹出提示框条目图标
+        , _componentPopup_: null//全局弹出提示框，整个应用只能有一个
+        , _arrCallback_: []//全局回调数组
         // ======================================================================
         // 初始化变量，可从外部接受参数
         // ======================================================================
@@ -201,8 +201,19 @@ let _zkFramework_ = {
         // ======================================================================
         // 透明遮罩层 Mask
         // ======================================================================
-        , _zkUiControlMask_: function () {
+        , _zkUiControlMask_: function (options) {
+            //设置参数默认值
+            let defaults = {
+                id: ''
+                , clsss: ''
+            };
+
+            //参数赋值
+            options = $.extend(defaults, options);
             let $mask = $('<div class="zk-mask"></div>')._zkGetZIndex_();
+            if (options.class) {
+                $mask.addClass(options.class);
+            }
             return $mask;
         }
         // ======================================================================
@@ -288,9 +299,10 @@ let _zkFramework_ = {
             //拼装元素
             let $overallMask = control._zkUiControlMask_();
             let panel = component._zkUiPanel_._create_({
-                class: 'zk-panel-alert'
+                class: 'zk-panel-alert zk-movable'
                 , title: options.title
                 , icon: options.titleIcon
+                , isMovable: true
                 , closeCallback: function () {
                     $overallMask._zkFadeOut_(setting._iAnimationTransitionTime_);
                     if (options.callback) {
@@ -306,8 +318,8 @@ let _zkFramework_ = {
             dom._zkBodyTag_.append($wrapper);
 
             $wrapper.css({
-                'margin-top': -$wrapper.outerHeight() / 2
-                , 'margin-left': -$wrapper.outerWidth() / 2
+                'top': (dom._zkBodyTag_.outerHeight() - $wrapper.outerHeight()) * 2 / 5
+                , 'left': (dom._zkBodyTag_.outerWidth() - $wrapper.outerWidth()) / 2
             });
             let $bigicon = control._zkUiControlIcon_({
                 class: setting._sPanelBigIconPrefix_ + options.bigIcon + ' zk-panel-alert-bigicon'
@@ -383,9 +395,10 @@ let _zkFramework_ = {
             //拼装元素
             let $overallMask = control._zkUiControlMask_();
             let panel = component._zkUiPanel_._create_({
-                class: 'zk-panel-alert'
+                class: 'zk-panel-alert zk-movable'
                 , title: options.title
                 , icon: options.titleIcon
+                , isMovable: true
                 , closeCallback: function () {
                     $overallMask._zkFadeOut_(setting._iAnimationTransitionTime_);
                     if (options.cancelCallback) {
@@ -401,8 +414,8 @@ let _zkFramework_ = {
             dom._zkBodyTag_.append($wrapper);
 
             $wrapper.css({
-                'margin-top': -$wrapper.outerHeight() / 2
-                , 'margin-left': -$wrapper.outerWidth() / 2
+                'top': (dom._zkBodyTag_.outerHeight() - $wrapper.outerHeight()) * 2 / 5
+                , 'left': (dom._zkBodyTag_.outerWidth() - $wrapper.outerWidth()) / 2
             });
             let $bigicon = control._zkUiControlIcon_({
                 class: setting._sPanelBigIconPrefix_ + options.bigIcon + ' zk-panel-alert-bigicon'
@@ -1037,8 +1050,11 @@ let _zkFramework_ = {
                     class: 'zk-mainmenusubitem-text'
                     , text: options.Title
                 });
+                let miBg = control._zkUiControlBorder_({
+                    class: 'zk-mainmenusubitem-bg'
+                });
 
-                menuSubItemInnerWrapper.append(miIcon).append(miTitle);
+                menuSubItemInnerWrapper.append(miIcon).append(miTitle).append(miBg);
                 menuSubItemWrapper.append(menuSubItemInnerWrapper);
                 groupwrapper.append(menuSubItemWrapper).hide();
 
@@ -1298,13 +1314,13 @@ let _zkFramework_ = {
                     , title: setting._sTitleBarText_
                     , icon: setting._sTitleBarIcon_
                     , isClosable: true
+                    , isMovable: false
                     , openCallback: null
                     , closeCallback: null
                 };
 
                 //参数赋值
                 options = $.extend(defaults, options);
-
                 let $panel = control._zkUiControlBorder_({
                     class: 'zk-panel'
                 });
@@ -1333,6 +1349,8 @@ let _zkFramework_ = {
                 $titleBarInner.append($titleBarText);
                 $titleBar.append($titleBarInner).append($titleBarIcon);
                 $panel.append($titleBar);
+
+                //可关闭
                 if (options.isClosable) {
                     let $titleBarOption = control._zkUiControlBorder_({
                         class: 'zk-panel-titlebarOption'
@@ -1354,12 +1372,66 @@ let _zkFramework_ = {
                 component._wrapper_ = $panel._zkGetZIndex_();
                 component._titlebar_ = $titleBar;
                 component._contentwrapper_ = $contentwrapper;
+
+                //可拖拽
+                if (options.isMovable) {
+                    $titleBarInner.mousedown(function (e) {
+                        let originalPageX = e.pageX;
+                        let originalPageY = e.pageY;
+                        let originalLeft = parseInt($panel.offset().left);
+                        let originalTop = parseInt($panel.offset().top);
+                        let offsetX = originalPageX - originalLeft;
+                        let offsetY = originalPageY - originalTop;
+                        let panelWidth = $panel.outerWidth();
+                        let panelHeight = $panel.outerHeight();
+
+                        let $moveMask = control._zkUiControlMask_({
+                            class: 'zk-panel-moveMask'
+                        });
+                        dom._zkBodyTag_.append($moveMask);
+                        $moveMask.mousemove(function (ev) {
+                            let left = parseInt($panel.offset().left);
+                            let top = parseInt($panel.offset().top);
+                            let pageX = ev.pageX;
+                            let pageY = ev.pageY;
+                            let targetX = 0;
+                            let targetY = 0;
+                            let windowWidth = dom._zkBodyTag_.outerWidth();
+                            let windowHeight = dom._zkBodyTag_.outerHeight();
+
+                            if (pageX - offsetX <= 0) {
+                                targetX = 0;
+                            } else if (windowWidth - panelWidth < pageX - offsetX) {
+                                targetX = windowWidth - panelWidth;
+                            }
+                            else {
+                                targetX = pageX - offsetX
+                            }
+                            if (pageY - offsetY <= 0) {
+                                targetY = 0;
+                            } else if (windowHeight - panelHeight < pageY - offsetY) {
+                                targetY = windowHeight - panelHeight;
+                            }
+                            else {
+                                targetY = pageY - offsetY
+                            }
+                            $panel.css({
+                                left: targetX
+                                , top: targetY
+                            });
+                        }).mouseup(function () {
+                            let $this = $(this);
+                            $this.remove();
+                        });
+                    });
+                    $panel.add('zk-panel-movable');
+                }
                 return this;
             }
             , _component_: {
-                _wrapper_: null,
-                _titlebar_: null,
-                _contentwrapper_: null
+                _wrapper_: null//整个面板
+                , _titlebar_: null//标题栏
+                , _contentwrapper_: null//内容包裹器
             }
         }
         // ======================================================================
@@ -1415,6 +1487,7 @@ let _zkFramework_ = {
                 , html: ''
                 , title: '模式弹窗'
                 , titleIcon: 'file'
+                , isMovable: true
                 , callback: null
             };
             options = $.extend(defaults, options);
@@ -1425,6 +1498,7 @@ let _zkFramework_ = {
                 , class: 'zk-panel-modal'
                 , title: options.title
                 , icon: options.titleIcon
+                , isMovable: options.isMovable
                 , closeCallback: function () {
                     $overallMask._zkFadeOut_(setting._iAnimationTransitionTime_);
                     if (options.callback) {
@@ -1435,7 +1509,6 @@ let _zkFramework_ = {
             let $wrapper = panel._component_._wrapper_;
             let $titlebar = panel._component_._titlebar_;
             let $contentwrapper = panel._component_._contentwrapper_;
-
             if (options.url) {
                 httpGet({
                     url: options.url
@@ -1446,17 +1519,24 @@ let _zkFramework_ = {
                         $contentwrapper.append(html);
                         dom._zkBodyTag_.append($overallMask);
                         dom._zkBodyTag_.append($wrapper);
-                        $wrapper.css({
-                            'margin-top': -$wrapper.outerHeight() / 2
-                            , 'margin-left': -$wrapper.outerWidth() / 2
-                        }).fadeIn(setting._iAnimationTransitionTime_, function () {
+                        if (!options.isMovable) {
+                            $wrapper.css({
+                                'margin-top': -$wrapper.outerHeight() / 2
+                                , 'margin-left': -$wrapper.outerWidth() / 2
+                            });
+                        } else {
+                            $wrapper.css({
+                                'left': (dom._zkBodyWrapper_.outerWidth() - $wrapper.outerWidth()) / 2
+                                , 'top': (dom._zkBodyWrapper_.outerHeight() - $wrapper.outerHeight()) * 2 / 5
+                            });
+                        }
+                        $wrapper.fadeIn(setting._iAnimationTransitionTime_, function () {
                             if (options.callback) {
                                 setting._arrCallback_.push(options.callback);
                             }
                         });
                     }
                 });
-            } else {
             }
         }
     }

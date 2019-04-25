@@ -267,6 +267,7 @@
     border-radius: 5px;
     box-shadow: #CCCCCC 0 0 4px;
     padding: 8px;
+    margin: -24px 0 0 -106px;
 }
 
 .zk-loadingPanel {
@@ -402,13 +403,12 @@
  * ========================================= */
 .zk-mainmenusubitem-groupwrapper {
     border-bottom: solid 1px #CCCCCC;
-    padding: 5px 0;
     background-color: #FFFFFF;
 }
 
 .zk-mainmenusubitem-innerwrapper {
-    height: 30px;
-    line-height: 30px;
+    height: 40px;
+    line-height: 40px;
     position: relative;
     background-color: #FFFFFF;
     border-left: solid 4px #F2F2F2;
@@ -417,22 +417,41 @@
 }
 
     .zk-mainmenusubitem-innerwrapper:hover {
-        border-left: solid 4px #438EB9;
+        border-left: solid 4px #20a036;
     }
 
         .zk-mainmenusubitem-innerwrapper:hover .zk-mainmenusubitem-text {
             color: #438EB9;
         }
 
+        .zk-mainmenusubitem-innerwrapper:hover .zk-mainmenusubitem-bg {
+            right: 0;
+        }
+
 .zk-mainmenusubitem-icon {
     position: absolute;
-    top: 7px;
+    top: 12px;
     left: 20px;
+    z-index: 100;
 }
 
 .zk-mainmenusubitem-text {
     padding: 0 0 0 50px;
     font-size: 12px;
+    position: relative;
+    z-index: 101;
+    white-space: nowrap;
+}
+
+.zk-mainmenusubitem-bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 100%;
+    z-index: 99;
+    background-color: #fdf4bf;
+    transition: right 0.5s;
 }
 /* =========================================
  * 全局遮罩
@@ -507,13 +526,21 @@
     height: 100%;
     overflow-y: auto;
 }
+
+.zk-panel-moveMask {
+    opacity: 0;
+}
+
+.zk-panel-movable {
+    top: 0;
+    left: 0;
+    margin: 0;
+}
 /* =========================================
  * 信息框 Alert
  * ========================================= */
 .zk-panel-alert {
     display: none;
-    top: 40%;
-    left: 50%;
 }
 
     .zk-panel-alert .zk-panel-contentwrapper {
@@ -701,7 +728,8 @@
     height: 28px;
     line-height: 28px;
 }
-.chosen-container-multi .chosen-choices{
+
+.chosen-container-multi .chosen-choices {
     border-radius: 4px;
 }
 

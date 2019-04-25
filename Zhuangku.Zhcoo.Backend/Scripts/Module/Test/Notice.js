@@ -88,7 +88,7 @@ $(function () {
                 id: 'TestModal'
                 , url: '/Test/Modal/'
                 , title: '模式弹窗'
-                , titleIcon: 'info'
+                , titleIcon: 'key'
                 , callback: function () {
                     $this.text('nihao');
                 }
