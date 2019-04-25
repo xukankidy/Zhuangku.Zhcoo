@@ -527,10 +527,9 @@
     overflow-y: auto;
 }
 
-.zk-panel-moveMask {
+.zk-moveMask {
     opacity: 0;
 }
-
 .zk-panel-movable {
     top: 0;
     left: 0;

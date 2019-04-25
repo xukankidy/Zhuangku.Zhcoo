@@ -1303,6 +1303,7 @@ let _zkFramework_ = {
             _create_: function (options) {
                 //快捷引用
                 let control = _zkFramework_._zkUiControl_;
+                let uiCom = _zkFramework_._zkUiComponent_;
                 let dom = _zkFramework_._zkDom_;
                 let component = this._component_;
                 let setting = _zkFramework_._zkSetting_;
@@ -1375,21 +1376,39 @@ let _zkFramework_ = {
 
                 //可拖拽
                 if (options.isMovable) {
-                    $titleBarInner.mousedown(function (e) {
-                        let originalPageX = e.pageX;
-                        let originalPageY = e.pageY;
-                        let originalLeft = parseInt($panel.offset().left);
-                        let originalTop = parseInt($panel.offset().top);
-                        let offsetX = originalPageX - originalLeft;
-                        let offsetY = originalPageY - originalTop;
-                        let panelWidth = $panel.outerWidth();
-                        let panelHeight = $panel.outerHeight();
+                    let originalPageX = 0;
+                    let originalPageY = 0;
+                    let originalLeft = 0;
+                    let originalTop = 0;
+                    let offsetX = 0;
+                    let offsetY = 0;
+                    let panelWidth = 0;
+                    let panelHeight = 0;
 
-                        let $moveMask = control._zkUiControlMask_({
-                            class: 'zk-panel-moveMask'
-                        });
-                        dom._zkBodyTag_.append($moveMask);
-                        $moveMask.mousemove(function (ev) {
+                    uiCom._zkUiDraggable_({
+                        dragTarget: $titleBarInner
+                        , beforeBindCallback: function () {
+                            _zkFramework_._zkDebugger_._log_({
+                                message: '绑定前回调'
+                            });
+                        }
+                        , mousedownCallback: function (e) {
+                            _zkFramework_._zkDebugger_._log_({
+                                message: '鼠标点下回调'
+                            });
+                            originalPageX = e.pageX;
+                            originalPageY = e.pageY;
+                            originalLeft = parseInt($panel.offset().left);
+                            originalTop = parseInt($panel.offset().top);
+                            offsetX = originalPageX - originalLeft;
+                            offsetY = originalPageY - originalTop;
+                            panelWidth = $panel.outerWidth();
+                            panelHeight = $panel.outerHeight();
+                        }
+                        , mousemoveCallback: function (ev) {
+                            _zkFramework_._zkDebugger_._log_({
+                                message: '鼠标移动回调'
+                            });
                             let left = parseInt($panel.offset().left);
                             let top = parseInt($panel.offset().top);
                             let pageX = ev.pageX;
@@ -1419,12 +1438,19 @@ let _zkFramework_ = {
                                 left: targetX
                                 , top: targetY
                             });
-                        }).mouseup(function () {
-                            let $this = $(this);
-                            $this.remove();
-                        });
+                        }
+                        , mouseupCallback: function (e) {
+                            _zkFramework_._zkDebugger_._log_({
+                                message: '鼠标松开回调'
+                            });
+                        }
+                        , afterBindCallback: function () {
+                            _zkFramework_._zkDebugger_._log_({
+                                message: '绑定后回调'
+                            });
+                            $panel.add('zk-panel-movable');
+                        }
                     });
-                    $panel.add('zk-panel-movable');
                 }
                 return this;
             }
@@ -1537,6 +1563,52 @@ let _zkFramework_ = {
                         });
                     }
                 });
+            }
+        }
+        // ======================================================================
+        // 可拖拽组件 Draggable
+        // ======================================================================
+        , _zkUiDraggable_: function (options) {
+            let control = _zkFramework_._zkUiControl_;
+            let dom = _zkFramework_._zkDom_;
+
+            let defaults = {
+                dragTarget: null
+                , beforeBindCallback: null
+                , mousedownCallback: null
+                , mousemoveCallback: null
+                , mouseupCallback: null
+                , afterBindCallback: null
+            };
+            options = $.extend(defaults, options);
+
+            if (options.beforeBindCallback) {
+                options.beforeBindCallback();
+            }
+
+            options.dragTarget.mousedown(function (e) {
+                if (options.mousedownCallback) {
+                    options.mousedownCallback(e);
+                }
+                let $moveMask = control._zkUiControlMask_({
+                    class: 'zk-moveMask'
+                });
+                dom._zkBodyTag_.append($moveMask);
+                $moveMask.mousemove(function (ev) {
+                    if (options.mousemoveCallback) {
+                        options.mousemoveCallback(ev);
+                    }
+                }).mouseup(function (ev) {
+                    let $this = $(this);
+                    $this.remove();
+                    if (options.mouseupCallback) {
+                        options.mouseupCallback(ev);
+                    }
+                });
+            });
+
+            if (options.afterBindCallback) {
+                options.afterBindCallback();
             }
         }
     }
@@ -1654,7 +1726,51 @@ let _zkFramework_ = {
     // ==========================================================================
     // 帮助方法
     // ==========================================================================
-    , _zkHelper_: {}
+    , _zkHelper_: {
+        _getDateTime_: function () {
+            var date = new Date();
+            var seperator1 = "-";
+            var seperator2 = ":";
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = date.getYear() + seperator1 + month + seperator1 + strDate
+                + " " + date.getHours() + seperator2 + date.getMinutes()
+                + seperator2 + date.getSeconds();
+            return currentdate;
+        }
+    }
+    // ==========================================================================
+    // 调试方法，内部使用
+    // ==========================================================================
+    , _zkDebugger_: {
+        // ======================================================================
+        // 记录日志
+        // ======================================================================
+        _log_: function (options) {
+            let defaults = {
+                level: 1//日志等级
+                , message: '日志内容'//日志内容
+            };
+            options = $.extend(defaults, options);
+            let dt = _zkFramework_._zkHelper_._getDateTime_();
+            let levelName = '';
+            switch (options.level) {
+                case 1:
+                    levelName = '信息';
+                    break;
+                case 2:
+                    levelName = '警告';
+                    break;
+            }
+            console.log('【' + dt + '】【' + levelName + '】' + options.message)
+        }
+    }
     // ==========================================================================
     // 整体初始化
     // ==========================================================================
