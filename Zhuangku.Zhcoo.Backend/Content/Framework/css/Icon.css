@@ -2,7 +2,7 @@
  * Title       : 图标样式表
  * Project     : 重庆木九科技商务报价平台前端框架
  * Version     : 1.0.0
- * Date        : 2019年4月20日
+ * Date        : 2019年4月25日
  * Developer   : 徐侃（Kidy）
  * Description : 定义了系统可用的图标样式，该样式表和相应的Css Sprite图片
                  由重庆木九科技前端优化工具生成
@@ -11,10 +11,13 @@
 .zk-icon-16-app,
 .zk-icon-16-briefcase,
 .zk-icon-16-bulb,
+.zk-icon-16-calculate,
 .zk-icon-16-checked,
 .zk-icon-16-close,
 .zk-icon-16-code,
+.zk-icon-16-colors,
 .zk-icon-16-computer,
+.zk-icon-16-cut,
 .zk-icon-16-date,
 .zk-icon-16-delete,
 .zk-icon-16-desktop,
@@ -27,9 +30,12 @@
 .zk-icon-16-eeplodingallocation,
 .zk-icon-16-email,
 .zk-icon-16-error,
+.zk-icon-16-error1,
 .zk-icon-16-exploding,
+.zk-icon-16-eye,
 .zk-icon-16-file,
 .zk-icon-16-folder,
+.zk-icon-16-format,
 .zk-icon-16-gear,
 .zk-icon-16-grid,
 .zk-icon-16-group,
@@ -39,6 +45,7 @@
 .zk-icon-16-info,
 .zk-icon-16-key,
 .zk-icon-16-left,
+.zk-icon-16-link,
 .zk-icon-16-list,
 .zk-icon-16-lock,
 .zk-icon-16-logoAccess,
@@ -56,6 +63,7 @@
 .zk-icon-16-new,
 .zk-icon-16-ok,
 .zk-icon-16-orgnization,
+.zk-icon-16-paste,
 .zk-icon-16-pencil,
 .zk-icon-16-person,
 .zk-icon-16-pieChart,
@@ -64,15 +72,19 @@
 .zk-icon-16-question,
 .zk-icon-16-refresh,
 .zk-icon-16-reload,
+.zk-icon-16-report,
 .zk-icon-16-return,
 .zk-icon-16-right,
 .zk-icon-16-rss,
 .zk-icon-16-save,
+.zk-icon-16-script,
+.zk-icon-16-shoppingCart,
 .zk-icon-16-speaker,
 .zk-icon-16-symbolMinus,
 .zk-icon-16-symbolPlus,
 .zk-icon-16-tabViewTagOpitionClose,
 .zk-icon-16-tabViewTagOpitionClose:hover,
+.zk-icon-16-time,
 .zk-icon-16-transparent,
 .zk-icon-16-unlock,
 .zk-icon-16-up,
@@ -83,9 +95,12 @@
 .zk-icon-24-power,
 .zk-icon-24-refresh,
 .zk-icon-64-bulb,
+.zk-icon-64-chrome,
 .zk-icon-64-error,
+.zk-icon-64-firefox,
 .zk-icon-64-forbidden,
 .zk-icon-64-globe,
+.zk-icon-64-ie,
 .zk-icon-64-key,
 .zk-icon-64-lock,
 .zk-icon-64-magnifier,
@@ -107,95 +122,110 @@
 .zk-icon-16-app { background-position: 0 0; height: 16px; width: 16px;}
 .zk-icon-16-briefcase { background-position: -16px 0; height: 16px; width: 16px;}
 .zk-icon-16-bulb { background-position: -32px 0; height: 16px; width: 16px;}
-.zk-icon-16-checked { background-position: -48px 0; height: 16px; width: 16px;}
-.zk-icon-16-close { background-position: -64px 0; height: 16px; width: 16px;}
-.zk-icon-16-code { background-position: -80px 0; height: 16px; width: 16px;}
-.zk-icon-16-computer { background-position: -96px 0; height: 16px; width: 16px;}
-.zk-icon-16-date { background-position: -112px 0; height: 16px; width: 16px;}
-.zk-icon-16-delete { background-position: -128px 0; height: 16px; width: 16px;}
-.zk-icon-16-desktop { background-position: -144px 0; height: 16px; width: 16px;}
-.zk-icon-16-disk { background-position: -160px 0; height: 16px; width: 16px;}
-.zk-icon-16-down { background-position: -176px 0; height: 16px; width: 16px;}
-.zk-icon-16-download { background-position: -192px 0; height: 16px; width: 16px;}
-.zk-icon-16-dustBin { background-position: -208px 0; height: 16px; width: 16px;}
-.zk-icon-16-dwg { background-position: -224px 0; height: 16px; width: 16px;}
-.zk-icon-16-earth { background-position: -240px 0; height: 16px; width: 16px;}
-.zk-icon-16-eeplodingallocation { background-position: -256px 0; height: 16px; width: 16px;}
-.zk-icon-16-email { background-position: -272px 0; height: 16px; width: 16px;}
-.zk-icon-16-error { background-position: -288px 0; height: 16px; width: 16px;}
-.zk-icon-16-exploding { background-position: -304px 0; height: 16px; width: 16px;}
-.zk-icon-16-file { background-position: -320px 0; height: 16px; width: 16px;}
-.zk-icon-16-folder { background-position: -336px 0; height: 16px; width: 16px;}
-.zk-icon-16-gear { background-position: -352px 0; height: 16px; width: 16px;}
-.zk-icon-16-grid { background-position: -368px 0; height: 16px; width: 16px;}
-.zk-icon-16-group { background-position: -384px 0; height: 16px; width: 16px;}
-.zk-icon-16-heart { background-position: -400px 0; height: 16px; width: 16px;}
-.zk-icon-16-histogram { background-position: -416px 0; height: 16px; width: 16px;}
-.zk-icon-16-home { background-position: -432px 0; height: 16px; width: 16px;}
-.zk-icon-16-info { background-position: -448px 0; height: 16px; width: 16px;}
-.zk-icon-16-key { background-position: -464px 0; height: 16px; width: 16px;}
-.zk-icon-16-left { background-position: -480px 0; height: 16px; width: 16px;}
-.zk-icon-16-list { background-position: -496px 0; height: 16px; width: 16px;}
-.zk-icon-16-lock { background-position: -512px 0; height: 16px; width: 16px;}
-.zk-icon-16-logoAccess { background-position: -528px 0; height: 16px; width: 16px;}
-.zk-icon-16-logoAndroid { background-position: -544px 0; height: 16px; width: 16px;}
-.zk-icon-16-logoChrome { background-position: -560px 0; height: 16px; width: 16px;}
-.zk-icon-16-logoExcel { background-position: -576px 0; height: 16px; width: 16px;}
-.zk-icon-16-logoFirefox { background-position: -592px 0; height: 16px; width: 16px;}
-.zk-icon-16-logoIe { background-position: -608px 0; height: 16px; width: 16px;}
-.zk-icon-16-logoPdf { background-position: -624px 0; height: 16px; width: 16px;}
-.zk-icon-16-logoPpt { background-position: 0 -16px; height: 16px; width: 16px;}
-.zk-icon-16-logoWord { background-position: -16px -16px; height: 16px; width: 16px;}
-.zk-icon-16-magnifier { background-position: -32px -16px; height: 16px; width: 16px;}
-.zk-icon-16-man { background-position: -48px -16px; height: 16px; width: 16px;}
-.zk-icon-16-menuperson { background-position: -64px -16px; height: 16px; width: 16px;}
-.zk-icon-16-new { background-position: -80px -16px; height: 16px; width: 16px;}
-.zk-icon-16-ok { background-position: -96px -16px; height: 16px; width: 16px;}
-.zk-icon-16-orgnization { background-position: -112px -16px; height: 16px; width: 16px;}
-.zk-icon-16-pencil { background-position: -128px -16px; height: 16px; width: 16px;}
-.zk-icon-16-person { background-position: -144px -16px; height: 16px; width: 16px;}
-.zk-icon-16-pieChart { background-position: -160px -16px; height: 16px; width: 16px;}
-.zk-icon-16-printer { background-position: -176px -16px; height: 16px; width: 16px;}
-.zk-icon-16-property { background-position: -192px -16px; height: 16px; width: 16px;}
-.zk-icon-16-question { background-position: -208px -16px; height: 16px; width: 16px;}
-.zk-icon-16-refresh { background-position: -224px -16px; height: 16px; width: 16px;}
-.zk-icon-16-reload { background-position: -240px -16px; height: 16px; width: 16px;}
-.zk-icon-16-return { background-position: -256px -16px; height: 16px; width: 16px;}
-.zk-icon-16-right { background-position: -272px -16px; height: 16px; width: 16px;}
-.zk-icon-16-rss { background-position: -288px -16px; height: 16px; width: 16px;}
-.zk-icon-16-save { background-position: -304px -16px; height: 16px; width: 16px;}
-.zk-icon-16-speaker { background-position: -320px -16px; height: 16px; width: 16px;}
-.zk-icon-16-symbolMinus { background-position: -336px -16px; height: 16px; width: 16px;}
-.zk-icon-16-symbolPlus { background-position: -352px -16px; height: 16px; width: 16px;}
-.zk-icon-16-tabViewTagOpitionClose { background-position: -368px -16px; height: 16px; width: 16px;}
-.zk-icon-16-tabViewTagOpitionClose:hover { background-position: -384px -16px; height: 16px; width: 16px;}
-.zk-icon-16-transparent { background-position: -400px -16px; height: 16px; width: 16px;}
-.zk-icon-16-unlock { background-position: -416px -16px; height: 16px; width: 16px;}
-.zk-icon-16-up { background-position: -432px -16px; height: 16px; width: 16px;}
-.zk-icon-16-warning { background-position: -448px -16px; height: 16px; width: 16px;}
-.zk-icon-24-key { background-position: 0 -32px; height: 24px; width: 24px;}
-.zk-icon-24-list { background-position: -24px -32px; height: 24px; width: 24px;}
-.zk-icon-24-menu { background-position: -48px -32px; height: 24px; width: 24px;}
-.zk-icon-24-power { background-position: -72px -32px; height: 24px; width: 24px;}
-.zk-icon-24-refresh { background-position: -96px -32px; height: 24px; width: 24px;}
-.zk-icon-64-bulb { background-position: 0 -56px; height: 64px; width: 64px;}
-.zk-icon-64-error { background-position: -64px -56px; height: 64px; width: 64px;}
-.zk-icon-64-forbidden { background-position: -128px -56px; height: 64px; width: 64px;}
-.zk-icon-64-globe { background-position: -192px -56px; height: 64px; width: 64px;}
-.zk-icon-64-key { background-position: -256px -56px; height: 64px; width: 64px;}
-.zk-icon-64-lock { background-position: -320px -56px; height: 64px; width: 64px;}
-.zk-icon-64-magnifier { background-position: -384px -56px; height: 64px; width: 64px;}
-.zk-icon-64-ok { background-position: -448px -56px; height: 64px; width: 64px;}
-.zk-icon-64-question { background-position: -512px -56px; height: 64px; width: 64px;}
-.zk-icon-64-rss { background-position: -576px -56px; height: 64px; width: 64px;}
-.zk-icon-64-save { background-position: 0 -120px; height: 64px; width: 64px;}
-.zk-icon-64-shutdown { background-position: -64px -120px; height: 64px; width: 64px;}
-.zk-icon-64-star { background-position: -128px -120px; height: 64px; width: 64px;}
-.zk-icon-64-tab { background-position: -192px -120px; height: 64px; width: 64px;}
-.zk-icon-64-tabError { background-position: -256px -120px; height: 64px; width: 64px;}
-.zk-icon-64-warning { background-position: -320px -120px; height: 64px; width: 64px;}
-.zk-icon-84x80-code { background-position: 0 -184px; height: 80px; width: 84px;}
-.zk-icon-84x80-dataGather { background-position: -84px -184px; height: 80px; width: 84px;}
-.zk-icon-84x80-dataRearrange { background-position: -168px -184px; height: 80px; width: 84px;}
-.zk-icon-84x80-gear { background-position: -252px -184px; height: 80px; width: 84px;}
-.zk-icon-84x80-radar { background-position: -336px -184px; height: 80px; width: 84px;}
+.zk-icon-16-calculate { background-position: -48px 0; height: 16px; width: 16px;}
+.zk-icon-16-checked { background-position: -64px 0; height: 16px; width: 16px;}
+.zk-icon-16-close { background-position: -80px 0; height: 16px; width: 16px;}
+.zk-icon-16-code { background-position: -96px 0; height: 16px; width: 16px;}
+.zk-icon-16-colors { background-position: -112px 0; height: 16px; width: 16px;}
+.zk-icon-16-computer { background-position: -128px 0; height: 16px; width: 16px;}
+.zk-icon-16-cut { background-position: -144px 0; height: 16px; width: 16px;}
+.zk-icon-16-date { background-position: -160px 0; height: 16px; width: 16px;}
+.zk-icon-16-delete { background-position: -176px 0; height: 16px; width: 16px;}
+.zk-icon-16-desktop { background-position: -192px 0; height: 16px; width: 16px;}
+.zk-icon-16-disk { background-position: -208px 0; height: 16px; width: 16px;}
+.zk-icon-16-down { background-position: -224px 0; height: 16px; width: 16px;}
+.zk-icon-16-download { background-position: -240px 0; height: 16px; width: 16px;}
+.zk-icon-16-dustBin { background-position: -256px 0; height: 16px; width: 16px;}
+.zk-icon-16-dwg { background-position: -272px 0; height: 16px; width: 16px;}
+.zk-icon-16-earth { background-position: -288px 0; height: 16px; width: 16px;}
+.zk-icon-16-eeplodingallocation { background-position: -304px 0; height: 16px; width: 16px;}
+.zk-icon-16-email { background-position: -320px 0; height: 16px; width: 16px;}
+.zk-icon-16-error { background-position: -336px 0; height: 16px; width: 16px;}
+.zk-icon-16-error1 { background-position: -352px 0; height: 16px; width: 16px;}
+.zk-icon-16-exploding { background-position: -368px 0; height: 16px; width: 16px;}
+.zk-icon-16-eye { background-position: -384px 0; height: 16px; width: 16px;}
+.zk-icon-16-file { background-position: -400px 0; height: 16px; width: 16px;}
+.zk-icon-16-folder { background-position: -416px 0; height: 16px; width: 16px;}
+.zk-icon-16-format { background-position: -432px 0; height: 16px; width: 16px;}
+.zk-icon-16-gear { background-position: -448px 0; height: 16px; width: 16px;}
+.zk-icon-16-grid { background-position: -464px 0; height: 16px; width: 16px;}
+.zk-icon-16-group { background-position: -480px 0; height: 16px; width: 16px;}
+.zk-icon-16-heart { background-position: -496px 0; height: 16px; width: 16px;}
+.zk-icon-16-histogram { background-position: -512px 0; height: 16px; width: 16px;}
+.zk-icon-16-home { background-position: -528px 0; height: 16px; width: 16px;}
+.zk-icon-16-info { background-position: -544px 0; height: 16px; width: 16px;}
+.zk-icon-16-key { background-position: -560px 0; height: 16px; width: 16px;}
+.zk-icon-16-left { background-position: -576px 0; height: 16px; width: 16px;}
+.zk-icon-16-link { background-position: -592px 0; height: 16px; width: 16px;}
+.zk-icon-16-list { background-position: -608px 0; height: 16px; width: 16px;}
+.zk-icon-16-lock { background-position: -624px 0; height: 16px; width: 16px;}
+.zk-icon-16-logoAccess { background-position: 0 -16px; height: 16px; width: 16px;}
+.zk-icon-16-logoAndroid { background-position: -16px -16px; height: 16px; width: 16px;}
+.zk-icon-16-logoChrome { background-position: -32px -16px; height: 16px; width: 16px;}
+.zk-icon-16-logoExcel { background-position: -48px -16px; height: 16px; width: 16px;}
+.zk-icon-16-logoFirefox { background-position: -64px -16px; height: 16px; width: 16px;}
+.zk-icon-16-logoIe { background-position: -80px -16px; height: 16px; width: 16px;}
+.zk-icon-16-logoPdf { background-position: -96px -16px; height: 16px; width: 16px;}
+.zk-icon-16-logoPpt { background-position: -112px -16px; height: 16px; width: 16px;}
+.zk-icon-16-logoWord { background-position: -128px -16px; height: 16px; width: 16px;}
+.zk-icon-16-magnifier { background-position: -144px -16px; height: 16px; width: 16px;}
+.zk-icon-16-man { background-position: -160px -16px; height: 16px; width: 16px;}
+.zk-icon-16-menuperson { background-position: -176px -16px; height: 16px; width: 16px;}
+.zk-icon-16-new { background-position: -192px -16px; height: 16px; width: 16px;}
+.zk-icon-16-ok { background-position: -208px -16px; height: 16px; width: 16px;}
+.zk-icon-16-orgnization { background-position: -224px -16px; height: 16px; width: 16px;}
+.zk-icon-16-paste { background-position: -240px -16px; height: 16px; width: 16px;}
+.zk-icon-16-pencil { background-position: -256px -16px; height: 16px; width: 16px;}
+.zk-icon-16-person { background-position: -272px -16px; height: 16px; width: 16px;}
+.zk-icon-16-pieChart { background-position: -288px -16px; height: 16px; width: 16px;}
+.zk-icon-16-printer { background-position: -304px -16px; height: 16px; width: 16px;}
+.zk-icon-16-property { background-position: -320px -16px; height: 16px; width: 16px;}
+.zk-icon-16-question { background-position: -336px -16px; height: 16px; width: 16px;}
+.zk-icon-16-refresh { background-position: -352px -16px; height: 16px; width: 16px;}
+.zk-icon-16-reload { background-position: -368px -16px; height: 16px; width: 16px;}
+.zk-icon-16-report { background-position: -384px -16px; height: 16px; width: 16px;}
+.zk-icon-16-return { background-position: -400px -16px; height: 16px; width: 16px;}
+.zk-icon-16-right { background-position: -416px -16px; height: 16px; width: 16px;}
+.zk-icon-16-rss { background-position: -432px -16px; height: 16px; width: 16px;}
+.zk-icon-16-save { background-position: -448px -16px; height: 16px; width: 16px;}
+.zk-icon-16-script { background-position: -464px -16px; height: 16px; width: 16px;}
+.zk-icon-16-shoppingCart { background-position: -480px -16px; height: 16px; width: 16px;}
+.zk-icon-16-speaker { background-position: -496px -16px; height: 16px; width: 16px;}
+.zk-icon-16-symbolMinus { background-position: -512px -16px; height: 16px; width: 16px;}
+.zk-icon-16-symbolPlus { background-position: -528px -16px; height: 16px; width: 16px;}
+.zk-icon-16-tabViewTagOpitionClose { background-position: -544px -16px; height: 16px; width: 16px;}
+.zk-icon-16-tabViewTagOpitionClose:hover { background-position: -560px -16px; height: 16px; width: 16px;}
+.zk-icon-16-time { background-position: -576px -16px; height: 16px; width: 16px;}
+.zk-icon-16-transparent { background-position: -592px -16px; height: 16px; width: 16px;}
+.zk-icon-16-unlock { background-position: -608px -16px; height: 16px; width: 16px;}
+.zk-icon-16-up { background-position: -624px -16px; height: 16px; width: 16px;}
+.zk-icon-16-warning { background-position: 0 -32px; height: 16px; width: 16px;}
+.zk-icon-24-key { background-position: 0 -48px; height: 24px; width: 24px;}
+.zk-icon-24-list { background-position: -24px -48px; height: 24px; width: 24px;}
+.zk-icon-24-menu { background-position: -48px -48px; height: 24px; width: 24px;}
+.zk-icon-24-power { background-position: -72px -48px; height: 24px; width: 24px;}
+.zk-icon-24-refresh { background-position: -96px -48px; height: 24px; width: 24px;}
+.zk-icon-64-bulb { background-position: 0 -72px; height: 64px; width: 64px;}
+.zk-icon-64-chrome { background-position: -64px -72px; height: 64px; width: 64px;}
+.zk-icon-64-error { background-position: -128px -72px; height: 64px; width: 64px;}
+.zk-icon-64-firefox { background-position: -192px -72px; height: 64px; width: 64px;}
+.zk-icon-64-forbidden { background-position: -256px -72px; height: 64px; width: 64px;}
+.zk-icon-64-globe { background-position: -320px -72px; height: 64px; width: 64px;}
+.zk-icon-64-ie { background-position: -384px -72px; height: 64px; width: 64px;}
+.zk-icon-64-key { background-position: -448px -72px; height: 64px; width: 64px;}
+.zk-icon-64-lock { background-position: -512px -72px; height: 64px; width: 64px;}
+.zk-icon-64-magnifier { background-position: -576px -72px; height: 64px; width: 64px;}
+.zk-icon-64-ok { background-position: 0 -136px; height: 64px; width: 64px;}
+.zk-icon-64-question { background-position: -64px -136px; height: 64px; width: 64px;}
+.zk-icon-64-rss { background-position: -128px -136px; height: 64px; width: 64px;}
+.zk-icon-64-save { background-position: -192px -136px; height: 64px; width: 64px;}
+.zk-icon-64-shutdown { background-position: -256px -136px; height: 64px; width: 64px;}
+.zk-icon-64-star { background-position: -320px -136px; height: 64px; width: 64px;}
+.zk-icon-64-tab { background-position: -384px -136px; height: 64px; width: 64px;}
+.zk-icon-64-tabError { background-position: -448px -136px; height: 64px; width: 64px;}
+.zk-icon-64-warning { background-position: -512px -136px; height: 64px; width: 64px;}
+.zk-icon-84x80-code { background-position: 0 -200px; height: 80px; width: 84px;}
+.zk-icon-84x80-dataGather { background-position: -84px -200px; height: 80px; width: 84px;}
+.zk-icon-84x80-dataRearrange { background-position: -168px -200px; height: 80px; width: 84px;}
+.zk-icon-84x80-gear { background-position: -252px -200px; height: 80px; width: 84px;}
+.zk-icon-84x80-radar { background-position: -336px -200px; height: 80px; width: 84px;}
