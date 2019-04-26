@@ -31,6 +31,7 @@ let _zkFramework_ = {
         , _sPopupPanelItemIcon_: 'speaker'//弹出提示框条目图标
         , _componentPopup_: null//全局弹出提示框，整个应用只能有一个
         , _arrCallback_: []//全局回调数组
+        , _iGlobalGap_: 10//全局间距
         // ======================================================================
         // 初始化变量，可从外部接受参数
         // ======================================================================
@@ -1388,14 +1389,9 @@ let _zkFramework_ = {
                     uiCom._zkUiDraggable_({
                         dragTarget: $titleBarInner
                         , beforeBindCallback: function () {
-                            _zkFramework_._zkDebugger_._log_({
-                                message: '绑定前回调'
-                            });
+                            $panel.addClass('zk-panel-movable');
                         }
                         , mousedownCallback: function (e) {
-                            _zkFramework_._zkDebugger_._log_({
-                                message: '鼠标点下回调'
-                            });
                             originalPageX = e.pageX;
                             originalPageY = e.pageY;
                             originalLeft = parseInt($panel.offset().left);
@@ -1406,9 +1402,6 @@ let _zkFramework_ = {
                             panelHeight = $panel.outerHeight();
                         }
                         , mousemoveCallback: function (ev) {
-                            _zkFramework_._zkDebugger_._log_({
-                                message: '鼠标移动回调'
-                            });
                             let left = parseInt($panel.offset().left);
                             let top = parseInt($panel.offset().top);
                             let pageX = ev.pageX;
@@ -1418,18 +1411,18 @@ let _zkFramework_ = {
                             let windowWidth = dom._zkBodyTag_.outerWidth();
                             let windowHeight = dom._zkBodyTag_.outerHeight();
 
-                            if (pageX - offsetX <= 0) {
-                                targetX = 0;
-                            } else if (windowWidth - panelWidth < pageX - offsetX) {
-                                targetX = windowWidth - panelWidth;
+                            if (pageX - offsetX <= setting._iGlobalGap_) {
+                                targetX = setting._iGlobalGap_;
+                            } else if (windowWidth - panelWidth - setting._iGlobalGap_ < pageX - offsetX) {
+                                targetX = windowWidth - panelWidth - setting._iGlobalGap_;
                             }
                             else {
                                 targetX = pageX - offsetX
                             }
-                            if (pageY - offsetY <= 0) {
-                                targetY = 0;
-                            } else if (windowHeight - panelHeight < pageY - offsetY) {
-                                targetY = windowHeight - panelHeight;
+                            if (pageY - offsetY <= setting._iGlobalGap_) {
+                                targetY = setting._iGlobalGap_;
+                            } else if (windowHeight - panelHeight - setting._iGlobalGap_ < pageY - offsetY) {
+                                targetY = windowHeight - panelHeight - setting._iGlobalGap_;
                             }
                             else {
                                 targetY = pageY - offsetY
@@ -1440,15 +1433,8 @@ let _zkFramework_ = {
                             });
                         }
                         , mouseupCallback: function (e) {
-                            _zkFramework_._zkDebugger_._log_({
-                                message: '鼠标松开回调'
-                            });
                         }
                         , afterBindCallback: function () {
-                            _zkFramework_._zkDebugger_._log_({
-                                message: '绑定后回调'
-                            });
-                            $panel.add('zk-panel-movable');
                         }
                     });
                 }
@@ -1465,7 +1451,10 @@ let _zkFramework_ = {
         // ======================================================================
         , _zkDateTiemPicker_: function (options) {
             if (!options.jqueryObj || options.jqueryObj.length == 0) {
-                console.log('没有选择到合适的DateTimePicker对象');
+                _zkFramework_._zkDebugger_._log_({
+                    level: 2
+                    , message: 'DateTiemPicker：jqueryObj为空'
+                });
                 return;
             }
 
@@ -1485,7 +1474,10 @@ let _zkFramework_ = {
         // ======================================================================
         , _zkChosen_: function (options) {
             if (!options.jqueryObj || options.jqueryObj.length == 0) {
-                console.log('没有选择到合适的chosen对象');
+                _zkFramework_._zkDebugger_._log_({
+                    level: 2
+                    , message: 'Chosen：jqueryObj为空'
+                });
                 return;
             }
 
@@ -1590,21 +1582,22 @@ let _zkFramework_ = {
                 if (options.mousedownCallback) {
                     options.mousedownCallback(e);
                 }
-                let $moveMask = control._zkUiControlMask_({
-                    class: 'zk-moveMask'
-                });
-                dom._zkBodyTag_.append($moveMask);
-                $moveMask.mousemove(function (ev) {
-                    if (options.mousemoveCallback) {
-                        options.mousemoveCallback(ev);
-                    }
-                }).mouseup(function (ev) {
-                    let $this = $(this);
-                    $this.remove();
-                    if (options.mouseupCallback) {
-                        options.mouseupCallback(ev);
-                    }
-                });
+                dom._zkBodyTag_
+                    .addClass('zk-moveMask')
+                    .on('mousemove', function (ev) {
+                        if (options.mousemoveCallback) {
+                            options.mousemoveCallback(ev);
+                        }
+                    }).one('mouseup', function (ev) {
+                        let $this = $(this);
+                        dom._zkBodyTag_
+                            .removeClass('zk-moveMask')
+                            .off('mousemove');
+
+                        if (options.mouseupCallback) {
+                            options.mouseupCallback(ev);
+                        }
+                    });
             });
 
             if (options.afterBindCallback) {

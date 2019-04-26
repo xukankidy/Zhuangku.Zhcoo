@@ -11,6 +11,12 @@
     height: 100%;
     background-color: #FFFFFF;
 }
+
+    #ZkBodyTag.zk-moveMask,
+    #ZkBodyTag.zk-moveMask * {
+        user-select: none;
+        cursor: move;
+    }
 /* =========================================
  * 包裹容器样式
  * ========================================= */
@@ -527,14 +533,22 @@
     overflow-y: auto;
 }
 
-.zk-moveMask {
-    opacity: 0;
-}
+/*.zk-moveMask {
+    opacity: 0.5;
+    user-select: none;
+    background-color: red;
+    cursor: move;
+}*/
+
 .zk-panel-movable {
     top: 0;
     left: 0;
     margin: 0;
 }
+
+    .zk-panel-movable .zk-panel-titlebarinner {
+        cursor: move;
+    }
 /* =========================================
  * 信息框 Alert
  * ========================================= */
