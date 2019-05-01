@@ -11,11 +11,9 @@ namespace Zhuangku.DevTool.EntityBuilder
 {
     public partial class FormMain : Form
     {
-
         private List<FieldModel> _fieldModelList = new List<FieldModel>();
         private DataTable _dtOld = new DataTable("FieldModelListOld");
         private DataTable _dtNew = new DataTable("FieldModelListNew");
-
 
         public FormMain()
         {
@@ -252,7 +250,6 @@ namespace Zhuangku.DevTool.EntityBuilder
 
         private void ListOld_DragDrop(object sender, DragEventArgs e)
         {
-
             string filePath = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
             try
             {
@@ -267,7 +264,6 @@ namespace Zhuangku.DevTool.EntityBuilder
             {
                 MessageBox.Show("错误：" + ex.Message);
             }
-
         }
 
         private void ListOld_DragEnter(object sender, DragEventArgs e)
