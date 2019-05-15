@@ -32,13 +32,14 @@
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonGenerate = new System.Windows.Forms.Button();
             this.buttonInverse = new System.Windows.Forms.Button();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.dataGridViewTable = new System.Windows.Forms.DataGridView();
             this.ColumnCheked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonGenerate = new System.Windows.Forms.Button();
+            this.buttonGenerateDto = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -78,6 +79,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonGenerateDto);
             this.panel1.Controls.Add(this.buttonGenerate);
             this.panel1.Controls.Add(this.buttonInverse);
             this.panel1.Controls.Add(this.buttonLoad);
@@ -86,6 +88,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(778, 194);
             this.panel1.TabIndex = 1;
+            // 
+            // buttonGenerate
+            // 
+            this.buttonGenerate.Location = new System.Drawing.Point(171, 15);
+            this.buttonGenerate.Name = "buttonGenerate";
+            this.buttonGenerate.Size = new System.Drawing.Size(75, 23);
+            this.buttonGenerate.TabIndex = 2;
+            this.buttonGenerate.Text = "生成";
+            this.buttonGenerate.UseVisualStyleBackColor = true;
+            this.buttonGenerate.Click += new System.EventHandler(this.buttonGenerate_Click);
             // 
             // buttonInverse
             // 
@@ -146,15 +158,15 @@
             this.name.HeaderText = "表名";
             this.name.Name = "name";
             // 
-            // buttonGenerate
+            // buttonGenerateDto
             // 
-            this.buttonGenerate.Location = new System.Drawing.Point(171, 15);
-            this.buttonGenerate.Name = "buttonGenerate";
-            this.buttonGenerate.Size = new System.Drawing.Size(75, 23);
-            this.buttonGenerate.TabIndex = 2;
-            this.buttonGenerate.Text = "生成";
-            this.buttonGenerate.UseVisualStyleBackColor = true;
-            this.buttonGenerate.Click += new System.EventHandler(this.buttonGenerate_Click);
+            this.buttonGenerateDto.Location = new System.Drawing.Point(9, 44);
+            this.buttonGenerateDto.Name = "buttonGenerateDto";
+            this.buttonGenerateDto.Size = new System.Drawing.Size(75, 23);
+            this.buttonGenerateDto.TabIndex = 3;
+            this.buttonGenerateDto.Text = "生成DTO";
+            this.buttonGenerateDto.UseVisualStyleBackColor = true;
+            this.buttonGenerateDto.Click += new System.EventHandler(this.buttonGenerateDto_Click);
             // 
             // FormMain
             // 
@@ -191,6 +203,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.Button buttonGenerate;
+        private System.Windows.Forms.Button buttonGenerateDto;
     }
 }
 

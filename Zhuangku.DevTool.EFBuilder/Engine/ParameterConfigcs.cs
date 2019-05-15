@@ -15,6 +15,7 @@ namespace Zhuangku.DevTool.EFBuilder.Engine
             //SPACECOUNT = ConfigurationManager.AppSettings["SpaceCount"].ToString();
             CONTEXTUSINGREGION = ConfigurationManager.AppSettings["ContextUsingRegion"].ToString();
             CONTEXTFILENAME = ConfigurationManager.AppSettings["ContextFilename"].ToString();
+            OUTPUTDIRDTO = ConfigurationManager.AppSettings["OutputDirDto"].ToString();
         }
 
         /// <summary>
@@ -41,5 +42,10 @@ namespace Zhuangku.DevTool.EFBuilder.Engine
         /// 生成的上下文文件的名称
         /// </summary>
         public readonly static string CONTEXTFILENAME;
+
+        /// <summary>
+        /// DOT输出路径
+        /// </summary>
+        public readonly static string OUTPUTDIRDTO;
     }
 }

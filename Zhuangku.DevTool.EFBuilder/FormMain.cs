@@ -126,7 +126,8 @@ namespace Zhuangku.DevTool.EFBuilder
             #region 构造方法
 
             sbContext.AppendLine(_databaseEngine.GetTabLevel(2) + "#region 构造方法 " + Environment.NewLine);
-            sbContext.AppendLine(_databaseEngine.GetTabLevel(2) + "public ZhuangkuIDSContext(){}" + Environment.NewLine);
+            sbContext.AppendLine(_databaseEngine.GetTabLevel(2) + "public " + contextFilename + "(){}" + Environment.NewLine);
+            sbContext.AppendLine(_databaseEngine.GetTabLevel(2) + "public " + contextFilename + "(DbContextOptions<" + contextFilename + "> options) : base(options){}" + Environment.NewLine);
             sbContext.AppendLine(_databaseEngine.GetTabLevel(2) + "#endregion 构造方法" + Environment.NewLine);
 
             #endregion 构造方法
@@ -159,7 +160,113 @@ namespace Zhuangku.DevTool.EFBuilder
 
                 #endregion 映射表名
 
-                sbContext.AppendLine(_databaseEngine.GetTabLevel(3) + "}" + Environment.NewLine);
+                #region 映射主键
+
+                var keyField = _databaseEngine.GetKeyField(item);
+
+                if (string.IsNullOrWhiteSpace(keyField.FieldName))
+                {
+                    File.AppendAllText("Log.txt", "数据表" + item + "没有主键");
+                    continue;
+                }
+                var fieldTempList = fields[item];
+                var keyFieldTemp = fieldTempList.Find(i => i.FieldName == keyField.FieldName);
+
+                if (keyFieldTemp == null)
+                {
+                    File.AppendAllText("Log.txt", "数据表" + item + "没有主键");
+                    continue;
+                }
+                sbContext.AppendLine(_databaseEngine.GetTabLevel(4) + "entity.HasKey(e => e." + keyFieldTemp.FieldName + ");" + Environment.NewLine);
+                if (keyFieldTemp.FieldType.ToLower() == "guid")
+                {
+                    sbContext.AppendLine(_databaseEngine.GetTabLevel(4) + "entity.Property(e => e." + keyFieldTemp.FieldName + ").ValueGeneratedNever();" + Environment.NewLine);
+                }
+
+                #endregion 映射主键
+
+                #region 遍历字段
+
+                //fieldTempList.Sort((a, b) => a.FieldName.CompareTo(b.FieldName));
+                foreach (var f in fieldTempList)
+                {
+                    if (f.FieldName == keyFieldTemp.FieldName)
+                    {//已定义主键，跳过
+                        continue;
+                    }
+                    switch (f.FieldType.ToLower())
+                    {
+                        case "int":
+                            sbContext.Append(_databaseEngine.GetTabLevel(4) + "entity.Property(e => e." + f.FieldName + ").HasColumnName(\"" + f.FieldName + "\")");
+                            break;
+
+                        case "string":
+                            sbContext.Append(_databaseEngine.GetTabLevel(4) + "entity.Property(e => e." + f.FieldName + ").HasColumnName(\"" + f.FieldName + "\")");
+                            if (f.FieldLength > 0)
+                            {
+                                sbContext.Append(".HasMaxLength(" + f.FieldLength + ")");
+                            }
+                            else if (f.FieldLength == -100)
+                            {
+                                sbContext.Append(".HasColumnType(\"text\")");
+                            }
+                            if (!f.IsUnicode)
+                            {
+                                sbContext.Append(".IsUnicode(false)");
+                            }
+                            break;
+
+                        case "bool":
+                            sbContext.Append(_databaseEngine.GetTabLevel(4) + "entity.Property(e => e." + f.FieldName + ").HasColumnName(\"" + f.FieldName + "\")");
+                            break;
+
+                        case "datetime":
+                            sbContext.Append(_databaseEngine.GetTabLevel(4) + "entity.Property(e => e." + f.FieldName + ").HasColumnName(\"" + f.FieldName + "\")");
+                            if (f.FieldLength == 0)
+                            {
+                                sbContext.Append(".HasColumnType(\"date\")");
+                            }
+                            else if (f.FieldLength == 1)
+                            {
+                                sbContext.Append(".HasColumnType(\"datetime\")");
+                            }
+                            break;
+
+                        case "double":
+                            sbContext.Append(_databaseEngine.GetTabLevel(4) + "entity.Property(e => e." + f.FieldName + ").HasColumnName(\"" + f.FieldName + "\")");
+                            break;
+
+                        case "decimal":
+                            sbContext.Append(_databaseEngine.GetTabLevel(4) + "entity.Property(e => e." + f.FieldName + ").HasColumnName(\"" + f.FieldName + "\")");
+                            if (f.FieldLength == -100)
+                            {
+                                sbContext.Append(".HasColumnType(\"money\")");
+                            }
+                            else
+                            {
+                                sbContext.Append(".HasColumnType(\"decimal(" + f.FieldLength * 2 + ", 0)\")");
+                            }
+                            break;
+
+                        case "guid":
+                            continue;
+                    }
+                    if (!f.IsNullable)
+                    {
+                        if (keyFieldTemp.FieldName != f.FieldName)
+                        {
+                            sbContext.Append(".IsRequired();" + Environment.NewLine);
+                        }
+                    }
+                    else
+                    {
+                        sbContext.Append(";" + Environment.NewLine);
+                    }
+                }
+
+                #endregion 遍历字段
+
+                sbContext.AppendLine(_databaseEngine.GetTabLevel(3) + "});" + Environment.NewLine);
             }
             sbContext.AppendLine(_databaseEngine.GetTabLevel(2) + "}");
             sbContext.AppendLine(Environment.NewLine + _databaseEngine.GetTabLevel(2) + "#endregion 生成模型" + Environment.NewLine);
@@ -184,6 +291,75 @@ namespace Zhuangku.DevTool.EFBuilder
                 var dr = _dtSource.Select("name='" + name + "'")[0];
                 dr["checked"] = isChecked;
             }
+        }
+
+        private void buttonGenerateDto_Click(object sender, EventArgs e)
+        {
+            if (_dtSource == null)
+            {
+                return;
+            }
+
+            #region 确认保存路径
+
+            var outputDir = ParameterConfig.OUTPUTDIRDTO;
+            if (!Directory.Exists(outputDir))
+            {
+                Directory.CreateDirectory(outputDir);
+            }
+
+            #endregion 确认保存路径
+
+            foreach (DataRow dr in _dtSource.Rows)
+            {
+                var isChecked = dr["checked"].ToString().ToLower() == "true" ? true : false;
+                if (!isChecked)
+                {//没有勾选，继续循环
+                    continue;
+                }
+                var tablename = dr["name"].ToString();
+                var commentTable = _databaseEngine.GetCommentList("table", tablename);
+                var sb = new StringBuilder();
+                sb.AppendLine(ParameterConfig.TABLEUSINGREGION);
+                sb.AppendLine("namespace " + ParameterConfig.NAMESPACE);
+                sb.AppendLine("{");
+                if (!string.IsNullOrWhiteSpace(commentTable))
+                {//添加备注
+                    sb.AppendLine(commentTable);
+                }
+                sb.AppendLine(_databaseEngine.GetTabLevel(1) + "public partial class " + tablename);
+                sb.AppendLine(_databaseEngine.GetTabLevel(1) + "{");
+
+                #region 生成属性
+
+                var fieldList = _databaseEngine.GetFieldList(tablename);
+
+                foreach (var item in fieldList)
+                {
+                    if (!string.IsNullOrWhiteSpace(item.FieldComment))
+                    {
+                        sb.AppendLine(item.FieldComment);
+                    }
+                    if (!item.IsNullable)
+                    {
+                        sb.AppendLine(_databaseEngine.GetTabLevel(2) + "[Required()]");
+                    }
+                    if (item.FieldType.ToLower() == "string" &&
+                        item.FieldLength > 0)
+                    {
+                        sb.AppendLine(_databaseEngine.GetTabLevel(2) + "[MaxLength(" + item.FieldLength + ")]");
+                    }
+                    sb.AppendLine(_databaseEngine.GetTabLevel(2) + item.FieldAccessType + " " + item.FieldType + (item.IsNullable ? (item.FieldType.ToLower() == "string" ? "" : "?") : "") + " " + item.FieldName + "  { get; set; }" + Environment.NewLine);
+                }
+
+                #endregion 生成属性
+
+                sb.AppendLine(_databaseEngine.GetTabLevel(1) + "}");
+                sb.AppendLine("}");
+                File.WriteAllLines(outputDir + tablename + "Dto.cs", new string[] { sb.ToString() });
+            }
+
+            MessageBox.Show("DTO生成完成");
         }
     }
 }

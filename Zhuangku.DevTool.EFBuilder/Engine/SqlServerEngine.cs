@@ -126,10 +126,21 @@ namespace Zhuangku.DevTool.EFBuilder.Engine
 
                     case "money":
                         field.FieldType = "decimal";
+                        field.FieldLength = -100;
+                        break;
+
+                    case "decimal":
+                        field.FieldType = "decimal";
                         break;
 
                     case "datetime":
                         field.FieldType = "DateTime";
+                        field.FieldLength = 1;
+                        break;
+
+                    case "date":
+                        field.FieldType = "DateTime";
+                        field.FieldLength = 0;
                         break;
 
                     case "uniqueidentifier":
@@ -152,6 +163,32 @@ namespace Zhuangku.DevTool.EFBuilder.Engine
                         field.FieldType = "byte[]";
                         break;
 
+                    case "text":
+                        field.FieldType = "string";
+                        field.FieldLength = -100;
+                        field.IsUnicode = true;
+                        break;
+
+                    case "nvarchar":
+                        field.FieldType = "string";
+                        field.FieldLength = field.FieldLength / 2;
+                        field.IsUnicode = true;
+                        break;
+
+                    case "nchar":
+                        field.FieldType = "string";
+                        field.FieldLength = field.FieldLength / 2;
+                        field.IsUnicode = true;
+                        break;
+
+                    case "varchar":
+                        field.FieldType = "string";
+                        break;
+
+                    case "char":
+                        field.FieldType = "string";
+                        break;
+
                     default:
                         field.FieldType = "string";
                         break;
@@ -159,6 +196,23 @@ namespace Zhuangku.DevTool.EFBuilder.Engine
             }
 
             return rets;
+        }
+
+        //// <summary>
+        /// 获取表的主键
+        /// </summary>
+        /// <param name="tablename">表名</param>
+        /// <returns></returns>
+        public FieldModel GetKeyField(string tablename)
+        {
+            var ret = new FieldModel();
+            var sqlString = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAME='" + tablename + "'";
+            var dt = Query(sqlString, _connectionString);
+            if (dt.Rows.Count > 0)
+            {
+                ret.FieldName = dt.Rows[0][0].ToString();
+            }
+            return ret;
         }
 
         /// <summary>

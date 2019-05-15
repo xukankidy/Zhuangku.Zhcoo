@@ -34,5 +34,12 @@ namespace Zhuangku.DevTool.EFBuilder.Engine
         /// <param name="tabLevel">缩进等级</param>
         /// <returns></returns>
         string GetTabLevel(int tabLevel);
+
+        /// <summary>
+        /// 获取表的主键
+        /// </summary>
+        /// <param name="tablename">表名</param>
+        /// <returns></returns>
+        FieldModel GetKeyField(string tablename);
     }
 }

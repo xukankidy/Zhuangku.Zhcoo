@@ -36,5 +36,10 @@
         /// 字段可否为空值
         /// </summary>
         public bool IsNullable { get; set; }
+
+        /// <summary>
+        /// 字段是否为Unicode
+        /// </summary>
+        public bool IsUnicode { get; set; }
     }
 }
